@@ -18,16 +18,23 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
     document.addEventListener("submit", (event) => {
         event.preventDefault();
-        if(/^[A-Za-z0-9]+(?:[_-][A-Za-z0-9]+)*$/.test(usernameInput.value)){
-            if(/^[a-zA-Z0-9]+$/.test(passwordInput.value)){
-                login();
-                window.location.replace("index.html");
-            }else{
-                msgError.innerHTML = "Contraseña no válida: Mínimo ocho caracteres, al menos una letra y un número";
-                msgError.style.display = "block";
+        const usernameValue = usernameInput.value.trim(); // Borra los espacios
+        const passwordValue = passwordInput.value;
+
+        const isUsernameValid = /^[A-Za-z0-9]+(?:[_-][A-Za-z0-9]+)*$/.test(usernameValue);
+        const isPasswordValid = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(passwordValue);
+
+        if (isUsernameValid && isPasswordValid) {
+            login();
+            window.location.replace("index.html");
+        } else {
+            msgError.innerHTML = ""; // Borra mensaje previo de error
+            if (!isUsernameValid) {
+                msgError.innerHTML += "Nombre de usuario no válido: solo números, letras y guiones. No puede comenzar ni terminar con guiones<br>";
             }
-        }else{
-            msgError.innerHTML = "Nombre de usuario no válido: solo números, letras y guiones. No puede comenzar ni terminar con guiones";
+            if (!isPasswordValid) {
+                msgError.innerHTML += "Contraseña no válida: Mínimo ocho caracteres, al menos una letra, un número y un carácter especial (@, $, !, %, *, #, ?, &)";
+            }
             msgError.style.display = "block";
         }
     });
