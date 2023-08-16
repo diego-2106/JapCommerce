@@ -12,3 +12,9 @@ document.addEventListener("DOMContentLoaded", function(){
         window.location = "products.html"
     });
 });
+document.getElementById("logout").addEventListener("click", logout)
+
+function logout(){
+    localStorage.setItem("llamalaComoQuieras",false)
+    window.location.href= "./login.html"
+}
