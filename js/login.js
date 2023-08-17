@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const login = () => {
         localStorage.username = usernameInput.value;
         localStorage.password = passwordInput.value;
+        localStorage.setItem("isLoggedIn", "true");
     }
 
     document.addEventListener("submit", event => {
@@ -23,10 +24,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 msgError.innerHTML = "Contraseña no válida: Debe tener mínimo 8 caracteres";
                 msgError.style.display = "block";
                 
-            }else{
+            }
+            else{
                 login();
                 window.location.replace("index.html");
-            }
+            }     
     });
 
     document.getElementById('password').addEventListener('change',(event) => {
