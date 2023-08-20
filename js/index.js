@@ -25,3 +25,13 @@ function logout(){
     localStorage.setItem("isLoggedIn",false)
     window.location.href = "./login.html"
 }
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const mostrarUsuario = document.getElementById("verUsuario"); 
+    const usuarioLogueado = localStorage.getItem("username"); 
+
+    if (usuarioLogueado) { 
+        mostrarUsuario.textContent = `${usuarioLogueado}`;
+    }
+});
