@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }     
     });
 
-    document.getElementById('password').addEventListener('change',(event) => {
+    document.getElementById('password').addEventListener('change',() => {
         msgError.style.display = "none";
     });
 });
