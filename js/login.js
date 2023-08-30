@@ -4,7 +4,7 @@
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", () => {
    
-    const usernameInput = document.getElementById("username");
+    const usernameInput = document.getElementById("email");
     const passwordInput = document.getElementById("password");
     const msgError = document.getElementById("msg-error");
 
@@ -34,4 +34,19 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById('password').addEventListener('change',(event) => {
         msgError.style.display = "none";
     });
+    // ----------------------------------------------------------------
+    const togglePasswordVisibility = () => {
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            toggleIcon.classList.remove("bi-eye");
+            toggleIcon.classList.add("bi-eye-slash");
+        } else {
+            passwordInput.type = "password";
+            toggleIcon.classList.remove("bi-eye-slash");
+            toggleIcon.classList.add("bi-eye");
+        }
+    };
+
+    const toggleIcon = document.getElementById("toggleIcon");
+    toggleIcon.addEventListener("click", togglePasswordVisibility);
 });
