@@ -1,4 +1,4 @@
-function sortAndFilterProducts(products, sortOption, minPrice, maxPrice) {
+function sortAndFilterProducts(products, sortOption, minPrice, maxPrice, text) {
     let result = products;
 
     if (minPrice) {
@@ -22,6 +22,9 @@ function sortAndFilterProducts(products, sortOption, minPrice, maxPrice) {
         case 'sortByRelevance':
             result.sort((a, b) => b.soldCount - a.soldCount);
             break;
+        case 'buscar':
+            console.log(text)
+            return result.filter(producto => producto.name.toLowerCase().includes(text.toLowerCase()));
     }
 
     return result;
@@ -30,6 +33,13 @@ function sortAndFilterProducts(products, sortOption, minPrice, maxPrice) {
 let sortOption = 'sortByCount';
 let minPrice = null;
 let maxPrice = null;
+let text = "";
+
+document.getElementById('buscar').addEventListener('input', () => {
+    sortOption = 'buscar';
+    text = document.getElementById('buscar').value;
+    showProductList();
+});
 
 document.getElementById('sortAsc').addEventListener('change', () => {
     sortOption = 'sortAsc';
@@ -69,12 +79,11 @@ async function showProductList() {
         const response = await fetch(url);
         const datos = await response.json();
 
-        const products = sortAndFilterProducts(datos.products, sortOption, minPrice, maxPrice);
+        const products = sortAndFilterProducts(datos.products, sortOption, minPrice, maxPrice, text);
 
         let htmlContentToAppend = "";
-        for (let i = 0; i < datos.products.length; i++) {
-            let product = datos.products[i];
-
+        for (let i = 0; i < products.length; i++) {
+            let product = products[i];
             htmlContentToAppend += `
             <a href="products.html" class="list-group-item list-group-item-action">
                 <div class="row">
@@ -103,4 +112,6 @@ async function showProductList() {
 document.addEventListener('DOMContentLoaded', () => {
     showProductList(); // Llama a la función aquí para que se ejecute cuando el DOM esté cargado
 });
+
+
 
