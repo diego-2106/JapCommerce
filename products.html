@@ -55,57 +55,51 @@
       <h2>Detalles</h2>
       <p class="lead">Verás aquí todas las categorías de los autos.</p>
     </div>
-    <div class="container">
-      <div class="row">
-        <div class="col text-end">
-          <div class="btn-group btn-group-toggle mb-4" data-bs-toggle="buttons">
+  
+    <div class="row mb-4">
+      <div class="col text-end">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <label class="btn btn-light active" for="sortByRelevance">
+            <input type="radio" class="btn-check" name="options" id="sortByRelevance" checked>
+            <i class="fas fa-sort-amount-down mr-1"></i> Relevancia
+          </label>
+          <label class="btn btn-light" for="sortAsc">
             <input type="radio" class="btn-check" name="options" id="sortAsc">
-            <label class="btn btn-light" for="sortAsc">A-Z</label>
+            <i class="fas fa-sort-amount-up mr-1"></i> Ascendente
+          </label>
+          <label class="btn btn-light" for="sortDesc">
             <input type="radio" class="btn-check" name="options" id="sortDesc">
-            <label class="btn btn-light" for="sortDesc">Z-A</label>
-            <input type="radio" class="btn-check" name="options" id="sortByCount" checked>
-            <label class="btn btn-light" for="sortByCount"><i class="fas fa-sort-amount-down mr-1"></i></label>
-           
+            <i class="fas fa-sort-amount-down-alt mr-1"></i> Descendente
+          </label>
+        </div>
+      </div>
+    </div>
+  
+    <div class="row mb-4">
+      <div class="col-lg-6 col-md-12 mb-1">
+        <div class="input-group">
+          <input type="number" class="form-control" id="rangeFilterPriceMin" placeholder="Precio mínimo">
+          <input type="number" class="form-control" id="rangeFilterPriceMax" placeholder="Precio máximo">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" id="rangeFilterPrice">Filtrar</button>
+            <button class="btn btn-link" id="clearRangeFilter">Limpiar</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-12">
+        <div class="input-group">
+          <input id="buscar" type="search" class="form-control" placeholder="Filtrar por nombre">
+          <div class="input-group-append">
+            <label class="btn btn-outline-secondary" for="buscar">
+              <i class="fas fa-search"></i>
+            </label>
           </div>
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-lg-6 offset-lg-6 col-md-12 mb-1 container">
-        <div class="row container p-0 m-0">
-          <div class="col">
-            <p class="font-weight-normal text-end my-2">Cant.</p>
-          </div>
-          <div class="col">
-            <input class="form-control" type="number" placeholder="min." id="rangeFilterCountMin">
-          </div>
-          <div class="col">
-            <input class="form-control" type="number" placeholder="máx." id="rangeFilterCountMax">
-          </div>
-          <div class="col-3 p-0">
-            <div class="btn-group" role="group">
-              <button class="btn btn-light btn-block" id="rangeFilterCount">Filtrar</button>
-              <button class="btn btn-link btn-sm" id="clearRangeFilter">Limpiar</button>
-              
-            </div>
-            <div>
-              <input type="number" id="rangeFilterPriceMin" placeholder="Precio mínimo">
-              <input type="number" id="rangeFilterPriceMax" placeholder="Precio máximo">
-              <button id="rangeFilterPrice">Filtrar por precio</button>
-            </div>
-            
-          </div>
-          <div class="col">
-            <label class="btn btn-light" for="buscar"><i class="fas fa-sort-amount-down mr-1"></i></label>
-            <input id="buscar" type="search" placeholder="Filtrar por nombre">
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container">
-        <div class="list-group" id="prod-list-container">
-
-        </div>        
+  
+    <div class="list-group" id="prod-list-container">
+      <!-- Aquí irán los elementos de la lista -->
     </div>
   </main>
   <footer class="text-muted">

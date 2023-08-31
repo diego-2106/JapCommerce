@@ -11,13 +11,10 @@ function sortAndFilterProducts(products, sortOption, minPrice, maxPrice, text) {
 
     switch (sortOption) {
         case 'sortAsc':
-            result.sort((a, b) => a.name.localeCompare(b.name));
+            result.sort((a, b) => a.cost - b.cost);
             break;
         case 'sortDesc':
-            result.sort((a, b) => b.name.localeCompare(a.name));
-            break;
-        case 'sortByPrice':
-            result.sort((a, b) => a.cost - b.cost);
+            result.sort((a, b) => b.cost - a.cost);
             break;
         case 'sortByRelevance':
             result.sort((a, b) => b.soldCount - a.soldCount);
@@ -29,60 +26,6 @@ function sortAndFilterProducts(products, sortOption, minPrice, maxPrice, text) {
 
     return result;
 }
-
-/* document.getElementById('rangeFilterPrice').addEventListener('click', () => {
-    minPrice = parseFloat(document.getElementById('rangeFilterPriceMin').value);
-    maxPrice = parseFloat(document.getElementById('rangeFilterPriceMax').value);
-    showProductList();
-}); */
-
-document.getElementById('rangeFilterPrice').addEventListener('click', () => {
-    minPrice = parseFloat(document.getElementById('rangeFilterPriceMin').value);
-    maxPrice = parseFloat(document.getElementById('rangeFilterPriceMax').value);
-    showProductList();
-});
-
-
-let sortOption = 'sortByCount';
-let minPrice = null;
-let maxPrice = null;
-let text = "";
-
-document.getElementById('buscar').addEventListener('input', () => {
-    sortOption = 'buscar';
-    text = document.getElementById('buscar').value;
-    showProductList();
-});
-
-document.getElementById('sortAsc').addEventListener('change', () => {
-    sortOption = 'sortAsc';
-    showProductList();
-});
-
-document.getElementById('sortDesc').addEventListener('change', () => {
-    sortOption = 'sortDesc';
-    showProductList();
-});
-
-document.getElementById('sortByCount').addEventListener('change', () => {
-    sortOption = 'sortByCount';
-    showProductList();
-});
-
-document.getElementById('rangeFilterCount').addEventListener('click', () => {
-    minPrice = document.getElementById('rangeFilterCountMin').value;
-    maxPrice = document.getElementById('rangeFilterCountMax').value;
-    showProductList();
-});
-
-document.getElementById('clearRangeFilter').addEventListener('click', () => {
-    document.getElementById('rangeFilterCountMin').value = '';
-    document.getElementById('rangeFilterCountMax').value = '';
-    minPrice = null;
-    maxPrice = null;
-    showProductList();
-});
-
 
 // Define la función showProductList en el ámbito global
 async function showProductList() {
@@ -121,10 +64,72 @@ async function showProductList() {
     }
 }
 
-// Llama a la función showProductList dentro del evento DOMContentLoaded
 document.addEventListener('DOMContentLoaded', () => {
     showProductList(); // Llama a la función aquí para que se ejecute cuando el DOM esté cargado
+
+    document.getElementById('clearRangeFilter').addEventListener('click', () => {
+        limpiarFiltros();
+    });
 });
+
+document.getElementById('rangeFilterPrice').addEventListener('click', () => {
+    minPrice = parseFloat(document.getElementById('rangeFilterPriceMin').value);
+    maxPrice = parseFloat(document.getElementById('rangeFilterPriceMax').value);
+    showProductList();
+});
+
+
+let sortOption = 'sortByRelevance';
+let minPrice = null;
+let maxPrice = null;
+let text = "";
+
+document.getElementById('sortAsc').addEventListener('change', () => {
+    sortOption = 'sortAsc';
+    showProductList();
+});
+
+document.getElementById('sortDesc').addEventListener('change', () => {
+    sortOption = 'sortDesc';
+    showProductList();
+});
+
+document.getElementById('sortByRelevance').addEventListener('click', () => {
+    if (sortOption !== 'sortByRelevance') {
+        sortOption = 'sortByRelevance';
+        showProductList();
+    }
+});
+
+document.getElementById('rangeFilterPrice').addEventListener('click', () => {
+    minPrice = parseFloat(document.getElementById('rangeFilterPriceMin').value);
+    maxPrice = parseFloat(document.getElementById('rangeFilterPriceMax').value);
+    showProductList();
+});
+
+document.getElementById('buscar').addEventListener('input', () => {
+    sortOption = 'buscar';
+    text = document.getElementById('buscar').value;
+    showProductList();
+});
+
+document.getElementById('clearRangeFilter').addEventListener('click', () => {
+    limpiarFiltros();
+});
+
+function limpiarFiltros() {
+    document.getElementById('rangeFilterPriceMin').value = '';
+    document.getElementById('rangeFilterPriceMax').value = '';
+    document.getElementById('buscar').value = '';
+    
+    minPrice = null;
+    maxPrice = null;
+    text = '';
+    sortOption = 'sortByCount';
+    
+    showProductList();
+}
+
 
 
 
