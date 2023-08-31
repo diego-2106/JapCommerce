@@ -30,6 +30,19 @@ function sortAndFilterProducts(products, sortOption, minPrice, maxPrice, text) {
     return result;
 }
 
+/* document.getElementById('rangeFilterPrice').addEventListener('click', () => {
+    minPrice = parseFloat(document.getElementById('rangeFilterPriceMin').value);
+    maxPrice = parseFloat(document.getElementById('rangeFilterPriceMax').value);
+    showProductList();
+}); */
+
+document.getElementById('rangeFilterPrice').addEventListener('click', () => {
+    minPrice = parseFloat(document.getElementById('rangeFilterPriceMin').value);
+    maxPrice = parseFloat(document.getElementById('rangeFilterPriceMax').value);
+    showProductList();
+});
+
+
 let sortOption = 'sortByCount';
 let minPrice = null;
 let maxPrice = null;
