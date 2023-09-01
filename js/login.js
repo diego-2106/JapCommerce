@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
         emailError.style.display = "none";
         passwordError.style.display = "none";
     
-        if (!isValidEmail || passwordInput.value.length < 8) {
+        if (!isValidEmail(emailInput.value) || passwordInput.value.length < 8) {
             Swal.fire({
                 icon: 'error',
                 title: 'Error de inicio de sesión',
