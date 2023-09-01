@@ -28,12 +28,15 @@ function sortAndFilterProducts(products, sortOption, minPrice, maxPrice, text) {
 }
 
 // Define la función showProductList en el ámbito global
+
 async function showProductList() {
-    const url = 'producto.json';
+    const url = `https://japceibal.github.io/emercado-api/cats_products/${localStorage.getItem("catID")}.json`;
+
 
     try {
         const response = await fetch(url);
         const datos = await response.json();
+        
 
         const products = sortAndFilterProducts(datos.products, sortOption, minPrice, maxPrice, text);
 
@@ -54,7 +57,7 @@ async function showProductList() {
                         <p class="mb-1">${product.description}</p>
                         <h4 class="my-3">${product.currency} ${product.cost}</h4>
                     </div>
-                </div>
+                </div
             </a>
             `;
         }
@@ -63,6 +66,7 @@ async function showProductList() {
         console.error('Error:', error);
     }
 }
+
 
 document.addEventListener('DOMContentLoaded', () => {
     showProductList(); // Llama a la función aquí para que se ejecute cuando el DOM esté cargado

@@ -36,9 +36,9 @@ function sortCategories(criteria, array){
 }
 
 //Modifico este metodo para que me muestren lo mismo el CatName y catID
-function setCatName(name) {
+function setCatName(name, catID) {
     localStorage.setItem("catName", name);
-    localStorage.setItem("catID", name);
+    localStorage.setItem("catID", catID);
     window.location = "products.html"
 }
 
@@ -47,12 +47,12 @@ function showCategoriesList(){
     let htmlContentToAppend = "";
     for(let i = 0; i < currentCategoriesArray.length; i++){
         let category = currentCategoriesArray[i];
-
+console.log(category)
         if (((minCount == undefined) || (minCount != undefined && parseInt(category.productCount) >= minCount)) &&
             ((maxCount == undefined) || (maxCount != undefined && parseInt(category.productCount) <= maxCount))){
 
             htmlContentToAppend += `
-            <div onclick="setCatName('${category.name}')" class="list-group-item list-group-item-action cursor-active">
+            <div onclick="setCatName('${category.name}', '${category.id}')" class="list-group-item list-group-item-action cursor-active">
                 <div class="row">
                     <div class="col-3">
                         <img src="${category.imgSrc}" alt="${category.description}" class="img-thumbnail">
