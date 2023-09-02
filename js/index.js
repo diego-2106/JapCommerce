@@ -33,7 +33,7 @@ function logout(){
 
 document.addEventListener("DOMContentLoaded", () => {
     const mostrarUsuario = document.getElementById("verUsuario"); 
-    const usuarioLogueado = localStorage.getItem("username"); 
+    const usuarioLogueado = localStorage.getItem("emailInput"); 
 
     if (usuarioLogueado) { 
         mostrarUsuario.textContent = `${usuarioLogueado}`;
