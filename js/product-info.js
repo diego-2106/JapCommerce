@@ -145,6 +145,11 @@
 //     showProductsDetails();
 // });
 
+
+
+//--------------- SE AGREGO PARA VER LOS DETALLES DE LOS PRODUCTOS------------------//
+
+
 async function showProductsDetails() {
     const selectedProductId = localStorage.getItem("selectedProductId");
     const url = `https://japceibal.github.io/emercado-api/products/${selectedProductId}.json`;
@@ -154,25 +159,25 @@ async function showProductsDetails() {
         const product = await response.json();
 
         let productDetailsHTML = `
-            <div class="row">
-                <div class="col-md-6">
-                <h2>${product.name}</h2>
-                <p>${product.description}</p>
-                <p>Precio:${product.currency} ${product.cost}</p>
-                <p>Vendidos: ${product.soldCount}</p>
-                
-            </div>
-            </div>
-        `;
-
+        <div class="row">
+        <div class="col-md-6">
+            <h2>${product.name}</h2>
+            <p><strong>Categoría:</strong> ${product.category}</p>
+            <p><strong>Descripción:</strong> ${product.description}</p>
+            <p><strong>Precio:</strong> ${product.currency} ${product.cost}</p>
+            <p><strong>Cantidad de vendidos:</strong> ${product.soldCount}</p>
+        </div>
+    </div>
+    <div class="images-product">
+        <p><strong>Imagen ilustrativa:</strong></p>
+`;
         if (product.images && product.images.length > 0) {
-            productDetailsHTML += '<div class="images-product">';
-                product.images.forEach(image => {
-                    productDetailsHTML += `<img src="${image}" alt="Imagen" style="width: 300px; margin-right: .5rem; border-radius: .3rem">`;
-                });
-            
-            productDetailsHTML += '</div>';
+            product.images.forEach(image => {
+                productDetailsHTML += `<img src="${image}" alt="Imagen" style="width: 300px; margin-right: .5rem; border-radius: .3rem">`;
+            });
         }
+
+        productDetailsHTML += '</div>';
 
         // Insertar el contenido en el div "contenedor-info"
         document.querySelector("#contenedor-info").innerHTML = productDetailsHTML;
@@ -184,6 +189,18 @@ async function showProductsDetails() {
 document.addEventListener('DOMContentLoaded', () => {
     showProductsDetails();
 });
+
+
+//-----------------------------------------------------------------------------------//
+
+
+
+
+
+
+
+
+//----------------------- COMENTARIOS--------------------------------//
 
 async function verComentarios() {
     const selectedProductId = localStorage.getItem("selectedProductId");
@@ -197,8 +214,7 @@ async function verComentarios() {
         console.log(comments);
 
         let commentsProductHTML = "";
-        
-        
+
         comments.forEach(comment => {
             const ratingStars = `
                 <div class="rating">
@@ -246,3 +262,4 @@ async function verComentarios() {
 
 // Llama a la función para cargar los comentarios cuando se carga la página
 window.addEventListener("load", verComentarios);
+//-----------------------------------------------------------------------------------//
