@@ -161,15 +161,16 @@ async function showProductsDetails() {
         let productDetailsHTML = `
         <div class="row">
         <div class="col-md-6">
-            <h2>${product.name}</h2>
+            <h2 class="h2-prodname">${product.name}</h2>
             <p><strong>Categoría:</strong> ${product.category}</p>
-            <p><strong>Descripción:</strong> ${product.description}</p>
             <p><strong>Precio:</strong> ${product.currency} ${product.cost}</p>
+            <p><strong>Descripción:</strong> ${product.description}</p>
             <p><strong>Cantidad de vendidos:</strong> ${product.soldCount}</p>
         </div>
     </div>
+    <p class="imgilustrativas"><strong>Imágenes ilustrativa:</strong></p>
     <div class="images-product">
-        <p><strong>Imagen ilustrativa:</strong></p>
+        
 `;
         if (product.images && product.images.length > 0) {
             product.images.forEach(image => {
