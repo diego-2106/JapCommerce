@@ -200,24 +200,49 @@ async function verComentarios() {
         
         
         comments.forEach(comment => {
+            const ratingStars = `
+                <div class="rating">
+                    ${getStarIcons(comment.score)}
+                </div>
+            `;
+
             commentsProductHTML += `
                 <div class="row comment">
                     <div class="col-md-6">
-                        <p>Puntaje: ${comment.score}</p>
-                        <p>Descripción:${comment.description}</p>
-                        <p>Usuario:${comment.user}</p>
-                        <p>Fecha:${comment.dateTime}</p>
+                        <p>Puntaje: ${ratingStars}</p>
+                        <p>Descripción: ${comment.description}</p>
+                        <p>Usuario: ${comment.user}</p>
+                        <p>Fecha: ${comment.dateTime}</p>
                     </div>
                 </div>
             `;
         });
 
-    document.querySelector(".comments-info").innerHTML = commentsProductHTML;
+        function getStarIcons(score) {
+            const maxStars = 5; // Máximo número de estrellas
+            const filledStars = Math.round(score); // Número de estrellas llenas
+
+            let starIcons = '';
+
+            for (let i = 0; i < maxStars; i++) {
+                if (i < filledStars) {
+                    starIcons += '<i class="fa fa-star filled"></i>';
+                } else {
+                    starIcons += '<i class="fa fa-star"></i>';
+                }
+            }
+
+            return starIcons;
+        }
+
+        // Agrega los comentarios al elemento con la clase "comments-info"
+        const commentsInfo = document.querySelector(".comments-info");
+        commentsInfo.innerHTML = commentsProductHTML;
+
     } catch (error) {
-        console.error("Error al obtener los detalles del producto:", error);
+        console.error("Error al cargar los comentarios:", error);
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    verComentarios();
-})
+// Llama a la función para cargar los comentarios cuando se carga la página
+window.addEventListener("load", verComentarios);

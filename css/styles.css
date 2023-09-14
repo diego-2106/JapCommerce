@@ -204,3 +204,12 @@ a.custom-card:hover {
 .comment p {
   margin: 5px 0;
 }
+
+/*---------------------------------ESTRELLITAS----------------------------------------- */
+
+/* Estilo para estrellas llenas */
+.fa-star.filled {
+  color: rgb(212, 152, 0); /* Cambia el color a tu preferencia */
+}
+
+/*---------------------------------ESTRELLITAS----------------------------------------- */
