@@ -28,6 +28,11 @@ function sortAndFilterProducts(products, sortOption, minPrice, maxPrice, text) {
 }
 
 // Define la función showProductList en el ámbito global
+function saveProductId(productId) {
+    // Guardar el ID del producto en el almacenamiento local
+    localStorage.setItem("selectedProductId", productId);
+    window.location.href = "product-info.html";
+}
 
 async function showProductList() {
     const url = `https://japceibal.github.io/emercado-api/cats_products/${localStorage.getItem("catID")}.json`;
@@ -44,7 +49,7 @@ async function showProductList() {
         for (let i = 0; i < products.length; i++) {
             let product = products[i];
             htmlContentToAppend += `
-            <a href="products.html" class="list-group-item list-group-item-action">
+            <a href="product-info.html" class="list-group-item list-group-item-action" onclick="saveProductId(${product.id})">
                 <div class="row">
                     <div class="col-12 col-md-3">
                         <img src="${product.image}" alt="${product.description}" class="img-thumbnail">
@@ -52,7 +57,7 @@ async function showProductList() {
                     <div class="col-12 col-md-9 pt-2 pt-md-0">
                         <div class="d-flex w-100 justify-content-between">
                             <h4 class="mb-1">${product.name}</h4>
-                            <small class="text-muted">${product.soldCount} artículos</small>
+                            <small class="text-muted">${product.soldCount} vendidos</small>
                         </div>
                         <p class="mb-1">${product.description}</p>
                         <h4 class="my-3">${product.currency} ${product.cost}</h4>
