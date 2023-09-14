@@ -164,7 +164,8 @@ async function showProductsDetails() {
             </div>
             </div>
         `;
-
+        
+        //MOSTRAMOS LAS IMAGENES
         if (product.images && product.images.length > 0) {
             productDetailsHTML += '<div class="images-product">';
                 product.images.forEach(image => {
@@ -184,3 +185,43 @@ async function showProductsDetails() {
 document.addEventListener('DOMContentLoaded', () => {
     showProductsDetails();
 });
+
+
+//Comentarios
+//-------------------------------------------------------
+async function verComentarios() {
+    const selectedProductId = localStorage.getItem("selectedProductId");
+
+    const urlComments = `https://japceibal.github.io/emercado-api/products_comments/${selectedProductId}.json`;
+
+    try {
+
+        const responseComments = await fetch(urlComments);
+        const comments = await responseComments.json();
+        console.log(comments);
+
+        let commentsProductHTML = "";
+        
+        
+        comments.forEach(comment => {
+            commentsProductHTML += `
+                <div class="row comment">
+                    <div class="col-md-6">
+                        <p>Puntaje: ${comment.score}</p>
+                        <p>Descripción:${comment.description}</p>
+                        <p>Usuario:${comment.user}</p>
+                        <p>Fecha:${comment.dateTime}</p>
+                    </div>
+                </div>
+            `;
+        });
+
+    document.querySelector(".comments-info").innerHTML = commentsProductHTML;
+    } catch (error) {
+        console.error("Error al obtener los detalles del producto:", error);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    verComentarios();
+})
