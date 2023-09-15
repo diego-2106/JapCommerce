@@ -65,6 +65,37 @@
 
 
     </div>
+
+
+    <form class="container needs-validation" id="comment-form">
+      <h2>Dejar un comentario</h2>
+
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="user-name">Nombre</label>
+          <input type="text" class="form-control" name="user-name" placeholder="" value="">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 mb-3">
+          <label for="comment-content">Observaciones</label>
+          <textarea class="form-control" name="comment-content" rows="3"></textarea>
+        </div>
+      </div>
+
+      <p id="user-stars-title">Puntaje</p>
+      <select name="select-puntaje" class="select">
+        <option value="value1">1</option>
+        <option value="value2">2</option>
+        <option value="value3">3</option>
+        <option value="value3">4</option>
+        <option value="value3">5</option>
+      </select>
+
+      <hr class="mb-4">
+      <button class="btn btn-primary" type="button">Publicar</button>
+    </form>
   </main>
   <footer class="text-muted">
     <div class="container">
