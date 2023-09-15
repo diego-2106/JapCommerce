@@ -277,5 +277,8 @@ body {
   text-align: center;
 }
 
+#comment-form {
+  margin-top: 3rem;
+}
 
 /* Estilos para separar los comentarios y las imagenees */
