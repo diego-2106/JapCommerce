@@ -264,3 +264,68 @@ async function verComentarios() {
 // Llama a la función para cargar los comentarios cuando se carga la página
 window.addEventListener("load", verComentarios);
 //-----------------------------------------------------------------------------------//
+
+//-----------------------------------------Agregar comentarios--------------------------
+document.getElementById('publicar').addEventListener('click', function () {
+    var userName = document.querySelector('input[name="user-name"]').value;
+    var commentContent = document.querySelector('textarea[name="comment-content"]').value;
+    var selectPuntaje = document.querySelector('select[name="select-puntaje"]').value;
+    var dateTime = getCurrentDate(); 
+
+    var nuevoComentario = createCommentHTML(userName, selectPuntaje, commentContent, dateTime);
+
+    var commentsContainer = document.querySelector('.comments-info');
+    commentsContainer.appendChild(nuevoComentario);
+
+    document.querySelector('input[name="user-name"]').value = '';
+    document.querySelector('textarea[name="comment-content"]').value = '';
+    document.querySelector('select[name="select-puntaje"]').value = '';
+});
+
+// Función para crear el HTML de un comentario
+function createCommentHTML(userName, selectPuntaje, commentContent, dateTime) {
+    const ratingStars = `
+        <div class="rating">
+            ${getStarIcons(selectPuntaje)}
+        </div>
+    `;
+
+    const commentHTML = document.createElement('div');
+    commentHTML.classList.add('row', 'comment');
+    commentHTML.innerHTML = `
+        <div class="col-md-6">
+            <p>Puntaje: ${ratingStars}</p>
+            <p>Descripción: ${commentContent}</p>
+            <p>Usuario: ${userName}</p>
+            <p>Fecha: ${dateTime}</p>
+        </div>
+    `;
+
+    return commentHTML;
+}
+
+// Función para obtener el HTML de las estrellas de calificación
+function getStarIcons(score) {
+    const maxStars = 5; // Máximo número de estrellas
+    const filledStars = Math.round(score); // Número de estrellas llenas
+
+    let starIcons = '';
+
+    for (let i = 0; i < maxStars; i++) {
+        if (i < filledStars) {
+            starIcons += '<i class="fa fa-star filled"></i>';
+        } else {
+            starIcons += '<i class="fa fa-star"></i>';
+        }
+    }
+
+    return starIcons;
+}
+
+
+// Función para obtener la fecha actual en el formato deseado
+function getCurrentDate() {
+    const now = new Date();
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return now.toLocaleDateString('es-ES', options);
+}
