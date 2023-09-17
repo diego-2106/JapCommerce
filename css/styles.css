@@ -2,7 +2,7 @@
 .card-body,
 .container,
 .site-header {
-  font-family: 'Verdana', serif !important;
+  font-family: "Verdana", serif !important;
 }
 
 .jumbotron .display-4 {
@@ -32,8 +32,8 @@ nav a {
   height: 50vh;
   padding: 5em inherit;
   margin-bottom: 0;
-  background-color: #53C0FB;
-  background: url('../img/cover_back.png');
+  background-color: #53c0fb;
+  background: url("../img/cover_back.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -73,12 +73,12 @@ footer {
 }
 
 footer p {
-  margin-bottom: .25rem;
+  margin-bottom: 0.25rem;
 }
 
 .site-header a {
   color: white;
-  transition: ease-in-out color .15s;
+  transition: ease-in-out color 0.15s;
 }
 
 .site-header .dropdown-menu a {
@@ -86,7 +86,7 @@ footer p {
 }
 
 .dropzone {
-  border: 2px dashed #0087F7;
+  border: 2px dashed #0087f7;
   border-radius: 5px;
   background: white;
 }
@@ -189,9 +189,9 @@ a.custom-card:hover {
   color: orange;
 }
 
-.mostrarUser{
+.mostrarUser {
   color: white;
-  margin-left: .5rem;
+  margin-left: 0.5rem;
 }
 
 .comment {
@@ -208,16 +208,15 @@ a.custom-card:hover {
 /*---------------------------------ESTRELLITAS----------------------------------------- */
 
 /* Estilo para estrellas llenas */
-.fa-star.filled {
-  color: rgb(212, 152, 0); 
+.filled {
+  color: rgb(212, 152, 0);
 }
 
 /*---------------------------------ESTRELLITAS----------------------------------------- */
 
-
 /* Estilos para separar los comentarios y las imagenees */
 body {
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
 }
 
 .navbar {
@@ -241,7 +240,7 @@ body {
 .linea {
   padding: 1rem;
   border: 1px solid black;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
 }
 .product-image img {
   max-width: 100%;
@@ -249,9 +248,9 @@ body {
 }
 
 .h2-comments {
-  text-align: center; 
+  text-align: center;
   margin: 5rem 0 2rem 0;
-  margin-right:800px;
+  margin-right: 800px;
 }
 
 .comments-info {
@@ -267,10 +266,10 @@ body {
   padding: 10px;
   margin-bottom: 10px;
   background-color: #ffffff;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   margin-left: auto;
   margin-right: auto;
-  max-width: 1000px; 
+  max-width: 1000px;
 }
 
 .images-product {

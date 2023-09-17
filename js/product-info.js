@@ -1,3 +1,4 @@
+const selectPuntaje = document.querySelector('select[name="select-puntaje"]');
 
 //--------------- SE AGREGO PARA VER LOS DETALLES DE LOS PRODUCTOS------------------//
 
@@ -79,22 +80,6 @@ async function verComentarios() {
             `;
         });
 
-        function getStarIcons(score) {
-            const maxStars = 5; // Máximo número de estrellas
-            const filledStars = Math.round(score); // Número de estrellas llenas
-
-            let starIcons = '';
-
-            for (let i = 0; i < maxStars; i++) {
-                if (i < filledStars) {
-                    starIcons += '<i class="fa fa-star filled"></i>';
-                } else {
-                    starIcons += '<i class="fa fa-star"></i>';
-                }
-            }
-
-            return starIcons;
-        }
 
         // Agrega los comentarios al elemento con la clase "comments-info"
         const commentsInfo = document.querySelector(".comments-info");
@@ -113,10 +98,25 @@ window.addEventListener("load", verComentarios);
 document.getElementById('publicar').addEventListener('click', function () {
     var userName = document.querySelector('input[name="user-name"]').value;
     var commentContent = document.querySelector('textarea[name="comment-content"]').value;
-    var selectPuntaje = document.querySelector('select[name="select-puntaje"]').value;
-    var dateTime = getCurrentDate(); 
+    let puntaje = selectPuntaje.value
 
-    var nuevoComentario = createCommentHTML(userName, selectPuntaje, commentContent, dateTime);
+    if (puntaje === "value1") {
+        puntaje = 1;
+    } else if (puntaje === "value2") {
+        puntaje = 2;
+    } else if (puntaje === "value3") {
+        puntaje = 3;
+    } else if (puntaje === "value4") {
+        puntaje = 4;
+    } else if (puntaje === "value5") {
+        puntaje = 5;
+    } else {
+        puntaje = 0;
+    }
+
+    var dateTime = getCurrentDate();
+
+    var nuevoComentario = createCommentHTML(userName, puntaje, commentContent, dateTime);
 
     var commentsContainer = document.querySelector('.comments-info');
     commentsContainer.appendChild(nuevoComentario);
@@ -149,21 +149,23 @@ function createCommentHTML(userName, selectPuntaje, commentContent, dateTime) {
 }
 
 // Función para obtener el HTML de las estrellas de calificación
-function getStarIcons(score) {
-    const maxStars = 5; // Máximo número de estrellas
-    const filledStars = Math.round(score); // Número de estrellas llenas
+function getStarIcons(puntaje) {
+    let estrellaLlena =
+        '<i class="fa fa-star filled"></i>';
+    let estrellaVacia =
+        '<i class="fa fa-star"></i>';
 
-    let starIcons = '';
+    let estrellasHTML = "";
 
-    for (let i = 0; i < maxStars; i++) {
-        if (i < filledStars) {
-            starIcons += '<i class="fa fa-star filled"></i>';
+    for (let i = 0; i < 5; i++) {
+        if (i < puntaje) {
+            estrellasHTML += estrellaLlena;
         } else {
-            starIcons += '<i class="fa fa-star"></i>';
+            estrellasHTML += estrellaVacia;
         }
     }
 
-    return starIcons;
+    return estrellasHTML;
 }
 
 
