@@ -96,8 +96,8 @@ window.addEventListener("load", verComentarios);
 
 //-----------------------------------------Agregar comentarios--------------------------
 document.getElementById('publicar').addEventListener('click', function () {
-    var userName = document.querySelector('input[name="user-name"]').value;
-    var commentContent = document.querySelector('textarea[name="comment-content"]').value;
+    let userName = document.querySelector('input[name="user-name"]').value;
+    let commentContent = document.querySelector('textarea[name="comment-content"]').value;
     let puntaje = selectPuntaje.value
 
     if (puntaje === "value1") {
@@ -114,11 +114,11 @@ document.getElementById('publicar').addEventListener('click', function () {
         puntaje = 0;
     }
 
-    var dateTime = getCurrentDate();
+    let dateTime = getCurrentDate();
 
-    var nuevoComentario = createCommentHTML(userName, puntaje, commentContent, dateTime);
+    let nuevoComentario = createCommentHTML(userName, puntaje, commentContent, dateTime);
 
-    var commentsContainer = document.querySelector('.comments-info');
+    let commentsContainer = document.querySelector('.comments-info');
     commentsContainer.appendChild(nuevoComentario);
 
     document.querySelector('input[name="user-name"]').value = '';
