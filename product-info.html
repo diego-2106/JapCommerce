@@ -6,6 +6,11 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
+
+ <!--links del darkmode-->
+    <link rel="stylesheet" href="css/darkmode.css">
+  <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+
     <title>eMercado - Todo lo que busques está aquí</title>
 
     <link
@@ -43,6 +48,7 @@
               <a class="nav-link" href="sell.html">Vender</a>
             </li>
             <li class="nav-item dropdown">
+
               <!-- La siguiente línea activa el menú desplegable -->
               <a
                 class="nav-link dropdown-toggle"
@@ -78,6 +84,11 @@
           </ul>
           <div class="mostrarUser" id="verUsuario"></div>
         </div>
+        <!--modo oscuro-->
+        
+        <button class="switchDark active" id="switch">
+          <span><i class='bx bx-sun' ></i></span>
+          <span><i class='bx bx-moon' ></i></span>
       </div>
     </nav>
     <main>
@@ -158,4 +169,6 @@
     <link href="css/font-awesome.min.css" rel="stylesheet" />
     <!-- ARRIBA ESTA EL LINK AL FRONT-AWESOME:MIN:CSS  PARA LAS ESTRELLITAS-->
   </body>
+  <script src="js/darkmode.js"></script>
+
 </html>
