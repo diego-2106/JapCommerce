@@ -48,8 +48,18 @@ body{
     background: #fff;
     color: #000;
 }
-body.dark{
-    background: #222;
-    color: #fff;
+body.dark, body.dark #contenedor, body.dark .col-md-4 {
+    background: #4D4D4D;
+    color: #fff
 }
 
+body.dark #autos,
+body.dark #juguetes,
+body.dark #muebles,
+body.dark .list-group-item,
+body.dark .list-group,
+body.dark .comment
+{
+    background-color: #000000;
+    color: #fff;
+}
