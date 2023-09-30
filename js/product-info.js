@@ -26,7 +26,7 @@ async function showProductsDetails() {
 `;
         if (product.images && product.images.length > 0) {
             product.images.forEach(image => {
-                productDetailsHTML += `<img src="${image}" alt="Imagen" style="width: 300px; margin-right: .5rem; border-radius: .3rem">`;
+                productDetailsHTML += `<img src="${image}" alt="Imagen">`;
             });
         }
 

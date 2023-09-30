@@ -67,3 +67,29 @@
         padding: 1%;
     }
     
+
+/*-------------------Diseño del carrusel------------------*/
+
+.images-product {
+    margin-left: 25%;
+    display: flex;
+    width: 600px;
+    height: 430px;
+}
+
+.images-product img {
+    width: 0;
+    flex-grow: 1;
+    object-fit: cover;
+    opacity: .8;
+    transition: .5s ease;
+}
+
+.images-product img:hover {
+    cursor: crosshair;
+    width: 90%;
+    opacity: 1;
+    filter: contrast(120%);
+}
+
+/*-------------------Fin diseño del carrusel------------------*/
