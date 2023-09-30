@@ -280,4 +280,11 @@ body {
   margin-top: 3rem;
 }
 
+.select {
+    width: 100px;
+    border: 1px rgb(174, 174, 174) solid;
+    border-radius: 5px;
+    padding: 5px;
+}
+
 /* Estilos para separar los comentarios y las imagenees */
