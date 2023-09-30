@@ -44,7 +44,26 @@
     left: unset;
     right: 0;
 }
+    body.dark {
+        background: #4D4D4D;
+        color: #fff;
+    }
 
-body.dark, body.dark #contenedor, body.dark .col-md-4 {
-    background: #4D4D4D;
-    color: #fff }
+    body.dark #autos,
+    body.dark #juguetes,
+    body.dark #muebles,
+    body.dark .list-group-item,
+    body.dark .list-group,
+    body.dark .comment,
+    body.dark .btn-light
+
+    {
+        background-color: #000000;
+        color: #fff;
+    }
+
+    body.dark footer {
+        background-color: #000000;
+        padding: 1%;
+    }
+    
