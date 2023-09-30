@@ -175,3 +175,36 @@ function getCurrentDate() {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     return now.toLocaleDateString('es-ES', options);
 }
+
+
+/*------------------------Productos relacionados----------------------*/
+async function productosRel() {
+    const url = `https://japceibal.github.io/emercado-api/cats_products/${localStorage.getItem("catID")}.json`;
+
+    try {
+        const response = await fetch(url);
+        const products = await response.json(); // Cambio "datos" a "products"
+
+        let relacionados = "";
+        for (let i = 0; i < products.length; i++) {
+            let product = products[i];
+            relacionados += `
+            <a href="product-info.html" class="list-group-item list-group-item-action" onclick="saveProductId(${product.id})">
+                <div class="row">
+                    <div class="col-12 col-md-3">
+                        <img src="${product.image}" alt="${product.description}" class="img-thumbnail">
+                    </div> 
+                    <div class="col-12 col-md-9 pt-2 pt-md-0">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h4 class="mb-1">${product.name}</h4>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            `;
+        }
+        document.getElementById("contenedor-relacionados").innerHTML = relacionados;
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
