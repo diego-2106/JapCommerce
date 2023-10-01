@@ -126,7 +126,7 @@ document.getElementById('publicar').addEventListener('click', function () {
     document.querySelector('select[name="select-puntaje"]').value = '';
 });
 
-// Función para crear el HTML de un comentario
+// función para crear el HTML de un comentario
 function createCommentHTML(userName, selectPuntaje, commentContent, dateTime) {
     const ratingStars = `
         <div class="rating">
@@ -148,7 +148,7 @@ function createCommentHTML(userName, selectPuntaje, commentContent, dateTime) {
     return commentHTML;
 }
 
-// Función para obtener el HTML de las estrellas de calificación
+// función para obtener el HTML de las estrellas de calificación
 function getStarIcons(puntaje) {
     let estrellaLlena =
         '<i class="fa fa-star filled"></i>';
@@ -169,7 +169,7 @@ function getStarIcons(puntaje) {
 }
 
 
-// Función para obtener la fecha actual 
+// función para obtener la fecha actual 
 function getCurrentDate() {
     const now = new Date();
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -177,34 +177,59 @@ function getCurrentDate() {
 }
 
 
-/*------------------------Productos relacionados----------------------*/
-async function productosRel() {
-    const url = `https://japceibal.github.io/emercado-api/cats_products/${localStorage.getItem("catID")}.json`;
+/*------------------------Productos relacionados----------------------*/ 
+// carga el archivo JSON "producto.json"
+fetch("producto.json")
+  .then((response) => response.json())
+  .then((data) => {
+    // La variable "data" contiene los productos relacionados del archivo JSON
+    mostrarProductosRelacionados(data);
+  })
+  .catch((error) => console.error("Error al cargar el archivo JSON: ", error));
 
-    try {
-        const response = await fetch(url);
-        const products = await response.json(); // Cambio "datos" a "products"
+function mostrarProductosRelacionados(productosRelacionados) {
+  const contenedorProductosRelacionados = document.getElementById(
+    "related-products-container"
+  );
 
-        let relacionados = "";
-        for (let i = 0; i < products.length; i++) {
-            let product = products[i];
-            relacionados += `
-            <a href="product-info.html" class="list-group-item list-group-item-action" onclick="saveProductId(${product.id})">
-                <div class="row">
-                    <div class="col-12 col-md-3">
-                        <img src="${product.image}" alt="${product.description}" class="img-thumbnail">
-                    </div> 
-                    <div class="col-12 col-md-9 pt-2 pt-md-0">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h4 class="mb-1">${product.name}</h4>
-                        </div>
-                    </div>
-                </div>
-            </a>
-            `;
-        }
-        document.getElementById("contenedor-relacionados").innerHTML = relacionados;
-    } catch (error) {
-        console.error('Error:', error);
-    }
+    const categoriaProductoActual = obtenerCategoriaDelProductoActual();
+
+  // filtra los productos relacionados por la categoría actual
+  const productosFiltrados = productosRelacionados.products.filter(
+    (producto) => producto.category === categoriaProductoActual
+  );
+
+  // limpia el contenido actual del contenedor
+  contenedorProductosRelacionados.innerHTML = "";
+
+  // recorre la lista de productos relacionados y agrega cada uno al contenedor
+  productosFiltrados.forEach((producto) => {
+    const productoRelacionado = document.createElement("div");
+    productoRelacionado.classList.add("col-md-4");
+
+    productoRelacionado.innerHTML = `
+      <div class="card mb-4 shadow-sm">
+        <img src="${producto.image}" class="img-fluid">
+        <div class="card-body">
+          <h4 class="card-title">${producto.name}</h4>
+          <p class="card-text">${producto.description}</p>
+          <p class="card-text">Precio: ${producto.currency} ${producto.cost}</p>
+        </div>
+      </div>
+    `;
+
+    contenedorProductosRelacionados.appendChild(productoRelacionado);
+  });
 }
+
+
+function obtenerCategoriaDelProductoActual() {
+    
+      }
+
+      
+      
+  
+
+
+  
