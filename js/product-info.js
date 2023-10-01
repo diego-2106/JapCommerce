@@ -24,6 +24,26 @@ async function showProductsDetails() {
     <div class="images-product">
         
 `;
+
+        let relatedProductsHTML = '';
+
+        product.relatedProducts.forEach(relProduct => {
+            relatedProductsHTML += `
+            <div onclick="setProdName('${relProduct.name}', '${relProduct.id}')" class="list-group-item list-group-item-action cursor-active">
+                <div class="row">
+                    <div class="col-3">
+                        <img src="${relProduct.image}" alt="${relProduct.name}" class="img-thumbnail">
+                    </div>
+                    <div class="col">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h4 class="mb-1">${relProduct.name}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+        })
+
+
         if (product.images && product.images.length > 0) {
             product.images.forEach(image => {
                 productDetailsHTML += `<img src="${image}" alt="Imagen">`;
@@ -34,9 +54,16 @@ async function showProductsDetails() {
 
         // Insertar el contenido en el div "contenedor-info"
         document.querySelector("#contenedor-info").innerHTML = productDetailsHTML;
+        document.querySelector("#related-products-container").innerHTML = relatedProductsHTML;
     } catch (error) {
         console.error("Error al obtener los detalles del producto:", error);
     }
+}
+
+function setProdName(prodName, prodId) {
+    localStorage.setItem("prodName", prodName);
+    localStorage.setItem("selectedProductId", prodId);
+    window.location = "product-info.html"
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -177,59 +204,48 @@ function getCurrentDate() {
 }
 
 
-/*------------------------Productos relacionados----------------------*/ 
+/*------------------------Productos relacionados----------------------*/
 // carga el archivo JSON "producto.json"
 fetch("producto.json")
-  .then((response) => response.json())
-  .then((data) => {
-    // La variable "data" contiene los productos relacionados del archivo JSON
-    mostrarProductosRelacionados(data);
-  })
-  .catch((error) => console.error("Error al cargar el archivo JSON: ", error));
+    .then((response) => response.json())
+    .then((data) => {
+        // La variable "data" contiene los productos relacionados del archivo JSON
+        mostrarProductosRelacionados(data);
+    })
+    .catch((error) => console.error("Error al cargar el archivo JSON: ", error));
 
 function mostrarProductosRelacionados(productosRelacionados) {
-  const contenedorProductosRelacionados = document.getElementById(
-    "related-products-container"
-  );
+    const contenedorProductosRelacionados = document.getElementById(
+        "related-products-container"
+    );
 
     const categoriaProductoActual = obtenerCategoriaDelProductoActual();
 
-  // filtra los productos relacionados por la categoría actual
-  const productosFiltrados = productosRelacionados.products.filter(
-    (producto) => producto.category === categoriaProductoActual
-  );
+    // filtra los productos relacionados por la categoría actual
+    const productosFiltrados = productosRelacionados.products.filter(
+        (producto) => producto.category === categoriaProductoActual
+    );
 
-  // limpia el contenido actual del contenedor
-  contenedorProductosRelacionados.innerHTML = "";
+    // limpia el contenido actual del contenedor
+    contenedorProductosRelacionados.innerHTML = "";
 
-  // recorre la lista de productos relacionados y agrega cada uno al contenedor
-  productosFiltrados.forEach((producto) => {
-    const productoRelacionado = document.createElement("div");
-    productoRelacionado.classList.add("col-md-4");
+    // recorre la lista de productos relacionados y agrega cada uno al contenedor
+    productosFiltrados.forEach((producto) => {
+        const productoRelacionado = document.createElement("div");
+        productoRelacionado.classList.add("col-md-4"); ``
 
-    productoRelacionado.innerHTML = `
-      <div class="card mb-4 shadow-sm">
-        <img src="${producto.image}" class="img-fluid">
-        <div class="card-body">
-          <h4 class="card-title">${producto.name}</h4>
-          <p class="card-text">${producto.description}</p>
-          <p class="card-text">Precio: ${producto.currency} ${producto.cost}</p>
-        </div>
-      </div>
-    `;
-
-    contenedorProductosRelacionados.appendChild(productoRelacionado);
-  });
+        contenedorProductosRelacionados.appendChild(productoRelacionado);
+    });
 }
 
 
 function obtenerCategoriaDelProductoActual() {
-    
-      }
 
-      
-      
-  
+}
 
 
-  
+
+
+
+
+
