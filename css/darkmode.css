@@ -73,6 +73,7 @@
 .images-product {
     margin-left: 25%;
     display: flex;
+    
     width: 600px;
     height: 430px;
 }
@@ -83,6 +84,7 @@
     object-fit: cover;
     opacity: .8;
     transition: .5s ease;
+    
 }
 
 .images-product img:hover {
