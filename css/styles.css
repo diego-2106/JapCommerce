@@ -281,10 +281,14 @@ body {
 }
 
 .select {
-    width: 100px;
-    border: 1px rgb(174, 174, 174) solid;
-    border-radius: 5px;
-    padding: 5px;
+  width: 100px;
+  border: 1px rgb(174, 174, 174) solid;
+  border-radius: 5px;
+  padding: 5px;
 }
 
 /* Estilos para separar los comentarios y las imagenees */
+
+.input-cantidad {
+  width: 60px;
+}
