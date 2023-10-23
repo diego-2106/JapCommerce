@@ -14,6 +14,7 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/cart.css">
 </head>
 
 <body>
@@ -61,6 +62,8 @@
         <span><i class='bx bx-moon' ></i></span>
     </div>
   </nav>
+
+
   <main>
     <div class="container">
       <ul id="cart-items">
@@ -87,7 +90,8 @@
           Standard 12 a 15 dias (5%)
         </label>
       </div>
-      <main>
+
+    <main>
       <form action="">
         <h3> Dirección de envio</h3>
         <div class="mb-3">
@@ -102,12 +106,41 @@
           <label for="exampleInputEmail1" class="form-label">Esquina</label>
           <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
         </div>
-
-      
       </form> 
     </main>
     </div>
+
+<!-- Punto 2 entrega 6 Forma de pago -->
+<h1>Forma de pago:</h1>
+
+<div id="formaPago"> </div>
+
+<div id="btn-modal">
+  <button type="submit" id="verModal">Seleccionar</button>
+</div>
+
+<div id="neonEffect">
+<div id="contenedorModal">
+  <form action="" id="formularioPago">
+    <p>Tarjeta de crédito <input type="radio" id="T-credito" name="metodoPago"> </p>
+    <p> Inserte número de tarjeta <input type="text" id="numeroTarjeta" required disabled> </p>
+    <p> Inserte código de seguridad <input type="text" id="codigoSeguridad" required disabled> </p>
+    <p> Inserte fecha de vencimiento <input type="date" id="fechaVencimiento" required disabled> </p> 
+
+    <p>Transferencia bancaria <input type="radio" id="T-bancaria" name="metodoPago"> </p>
+    <p> Inserte número de cuenta <input type="text" id="numeroCuenta" required disabled> </p>
+
+    <button type="submit" id="ocultarModal">Aceptar</button>
+  </form>
+
+</div>
+
+</div>
+<!-- Fin punto 2 entrega 6 Forma de pago -->
+
+
   </main>
+
   <footer class="text-muted">
     <div class="container">
       <p class="float-end">
@@ -116,6 +149,7 @@
       <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
     </div>
   </footer>
+
   <div id="spinner-wrapper">
     <div class="lds-ring">
       <div></div>

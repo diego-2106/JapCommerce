@@ -55,11 +55,15 @@
     body.dark .list-group-item,
     body.dark .list-group,
     body.dark .comment,
-    body.dark .btn-light
-
+    body.dark .btn-light,
+    body.dark #contenedorModal.mostrar form
     {
         background-color: #000000;
         color: #fff;
+    }
+   
+    body.dark #contenedorModal.mostrar {
+        background-color: rgb(34, 34, 34);
     }
 
     body.dark footer {

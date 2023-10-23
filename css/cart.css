@@ -1,0 +1,49 @@
+#btn-modal {
+    margin: 3%;
+}
+
+
+#contenedorModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    opacity: 0;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+#contenedorModal.mostrar {
+    background-color: rgb(119, 119, 119);
+    z-index: 1;
+    opacity: 0.9;
+  }
+
+  #contenedorModal.mostrar form {
+    opacity: 10;
+    background-color: white;
+    padding: 5%;
+    box-shadow: 0 0 20px 10px transparent;
+    animation: neonColorChange 4s infinite;
+}
+  
+  @keyframes neonColorChange {
+    25% {
+      box-shadow: 0 0 20px 10px rgb(255, 252, 75);
+    }
+    50% {
+      box-shadow: 0 0 20px 10px rgb(72, 255, 0);
+    }
+    75% {
+      box-shadow: 0 0 20px 10px rgb(0, 255, 255);
+    }
+    100% {
+      box-shadow: 0 0 20px 10px rgb(0, 4, 255);
+    }
+  }
+  
