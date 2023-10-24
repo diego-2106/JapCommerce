@@ -70,6 +70,8 @@ nav a {
 footer {
   padding-top: 3rem;
   padding-bottom: 3rem;
+  display: flex;
+  justify-content: space-between;
 }
 
 footer p {
@@ -205,6 +207,52 @@ a.custom-card:hover {
   margin: 5px 0;
 }
 
+.btn-center {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: flex-start;
+}
+.btn-center button {
+  width: 15rem;
+}
+
+.btn-eliminar {
+  display: flex;
+  justify-content: end;
+}
+
+.btn-eliminar button{
+  width: 10rem;
+}
+
+.title-carrito {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.envios {
+  margin-top: 2rem;
+  font-size: 1.1rem;
+}
+
+.contenido {
+  font-size: 1.2rem;
+  background-color: #f3f3f3;
+  border-radius: .5rem;
+  padding: .5rem;
+}
+
+#related-products {
+  margin-top: 3rem
+}
+#related-products h2 {
+  margin-bottom: 1.5rem
+}
+
+.btn-publicar {
+  width: 10rem;
+}
+
 /*---------------------------------ESTRELLITAS----------------------------------------- */
 
 /* Estilo para estrellas llenas */
@@ -291,4 +339,39 @@ body {
 
 .input-cantidad {
   width: 60px;
+}
+
+/*Carrito*/
+.formulario {
+  margin-top: 2rem;
+}
+
+.formulario h3 {
+  margin-bottom: 1.5rem;
+}
+
+.pago-forma {
+  margin-top: 1.5rem;
+}
+
+#formularioPago h4{
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+#formularioPago {
+  border-radius: 1rem;
+}
+
+.btnmodal button {
+  width: 15rem;
+  border-radius: 2rem;
+  padding: .5rem;
+}
+
+#neonEffect button {
+  width: 100%;
+  border-radius: 1rem;
+  padding: .3rem;
+  margin-top: 3rem;
 }

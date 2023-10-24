@@ -11,6 +11,7 @@ async function showProductsDetails() {
         const product = await response.json();
 
         let productDetailsHTML = `
+        <div class="contenido container">
         <div class="row">
         <div class="col-md-6">
             <h2 class="h2-prodname">${product.name}</h2>
@@ -20,7 +21,8 @@ async function showProductsDetails() {
             <p><strong>Cantidad de vendidos:</strong> ${product.soldCount}</p>
         </div>
     </div>
-    <p class="imgilustrativas"><strong>Imágenes ilustrativa:</strong></p>
+    </div>
+    <p class="imgilustrativas container" style="font-size: 1.3rem"><strong>Imágenes ilustrativa:</strong></p>
     <div class="images-product">
         
 `;
@@ -29,7 +31,7 @@ async function showProductsDetails() {
 
         product.relatedProducts.forEach(relProduct => {
             relatedProductsHTML += `
-            <div onclick="setProdName('${relProduct.name}', '${relProduct.id}')" class="list-group-item list-group-item-action cursor-active">
+            <div onclick="setProdName('${relProduct.name}', '${relProduct.id}', '${relProduct.description}')" class="list-group-item list-group-item-action cursor-active">
                 <div class="row">
                     <div class="col-3">
                         <img src="${relProduct.image}" alt="${relProduct.name}" class="img-thumbnail">
@@ -60,7 +62,7 @@ async function showProductsDetails() {
     }
 }
 
-function setProdName(prodName, prodId) {
+function setProdName(prodName, prodId, prodDescription) {
     localStorage.setItem("prodName", prodName);
     localStorage.setItem("selectedProductId", prodId);
     window.location = "product-info.html"
@@ -243,7 +245,36 @@ function obtenerCategoriaDelProductoActual() {
 
 }
 
+function agregarProductoAlCarrito(productId, quantity) {
+    // Obtener el carrito actual del almacenamiento local
+    const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
+    // Agregar el producto al carrito
+    carrito.unshift({ productId, quantity });
+
+    // Guardar el carrito actualizado en el localstorage
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+}
+document.getElementById("comprar").addEventListener("click", function () {
+    // Obtener el ID del producto que se va a comprar
+    const selectedProductId = localStorage.getItem("selectedProductId");
+    const productQuantity = 1;
+
+    // Agregar el producto al carrito
+    agregarProductoAlCarrito(selectedProductId, productQuantity);
+
+    // Alerta que se agrego al carro
+    success();
+
+});
+
+function success() {
+    Swal.fire(
+        'Éxito',
+        'Tu producto se ha agregado al carrito.',
+        'success'
+      )
+}
 
 
 

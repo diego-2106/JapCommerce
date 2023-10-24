@@ -1,7 +1,6 @@
-let idusuario = 25801;
-let API = `https://japceibal.github.io/emercado-api/user_cart/${idusuario}.json`;
-
-fetch(API)
+/*let productoCarrito = localStorage.getItem("carrito");
+let URL =  `https://japceibal.github.io/emercado-api/products/${productoCarrito}.json`;
+fetch(URL)
     .then((response) => {
         if (!response.ok) {
             throw new Error("Error de solicitud");
@@ -58,6 +57,94 @@ fetch(API)
         const totalSpan = document.getElementById("cart-total");
         totalSpan.textContent = `Total: ${data.currency} ${subtotal}`;
     });
+*/
+document.addEventListener('DOMContentLoaded', () => {
+  // Recupera el carrito del almacenamiento local
+  const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+  const carritoContainer = document.getElementById("cart-items"); // El ID del contenedor en tu HTML
+
+  let subtotal = 0;
+
+  // Función para mostrar un producto en el carrito
+  async function mostrarProductoEnCarrito(productId, quantity) {
+    try {
+      
+      let response = await fetch(`https://japceibal.github.io/emercado-api/products/${productId}.json`);
+      if (!response.ok) {
+        throw new Error("Error de solicitud");
+      }
+      let productDetails = await response.json();
+      
+
+      // Calcula el subtotal del producto
+      let subtotalProducto = productDetails.unitCost * quantity;
+
+      // Crea un elemento HTML para mostrar el producto en el carrito
+      let productoHTML = `
+        <div class="card d-flex flex-row align-items-center" data-product-index="${productId}">
+            <img src="${productDetails.images[0]}" alt="imagenDeProducto" width="250px" style="margin-left: 1rem; border-radius: .5rem;"/>
+            <div class="card-body">
+                <h4 class="card-title">${productDetails.name}</h4>
+                <p class="card-text">
+                    Precio Unidad: ${productDetails.currency} ${productDetails.unitCost}
+                    <input type="number" min="1" value="1" class="input-cantidad form-control cantProd flex-grow" style="margin-top: 1rem;" />
+                </p>
+                Subtotal: <span id="subtotalProducto${productId}">${productDetails.currency} ${subtotalProducto}</span>
+                <div class="btn-eliminar">
+                <button class="btn btn-danger eliminar-producto" data-product-index="${productId}"><i class="bi bi-trash3-fill"> </i>Eliminar</button>
+                </div>
+            </div>
+        </div>
+      `;
+
+      // Agrega el producto al contenedor
+      carritoContainer.innerHTML += productoHTML;
+
+    } catch (error) {
+      console.error("Error al obtener detalles del producto:", error);
+    }
+  }
+
+  function eliminarProductoDelCarrito(productId) {
+    // Encuentra el índice del producto en el carrito
+    const productoIndex = carrito.findIndex((producto) => producto.productId === productId);
+  
+    if (productoIndex !== -1) { // Comprueba si se encontró un índice válido
+      // aca refiere a todo lo que engloba a productoHTML
+      const productoElement = document.querySelector(`[data-product-index="${productId}"]`);
+      
+      if (productoElement && productoElement.parentElement) { // Comprueba si el elemento existe
+
+        // Elimina el producto del carrito
+        carrito.splice(productoIndex, 1); // el splice recibe 2 valores como argumento
+        //el primer valor es el elemento que vas a borrar y el segundo valor es 
+        //la cantidad de elementos que vos vas a eliminar despues del primero
+        // en este caso es como si pusieras (1,1) solo borra 1 elemento
+
+        // Elimina el elemento HTML del producto del carrito
+        productoElement.parentElement.removeChild(productoElement);
+        
+        // Actualiza el almacenamiento local
+        localStorage.setItem("carrito", JSON.stringify(carrito));
+      }
+    }
+  }
+
+  // Adjunta un controlador de eventos a los botones de eliminar productos
+  carritoContainer.addEventListener("click", (event) => {
+    if (event.target.classList.contains("eliminar-producto")) {
+      const productId = event.target.getAttribute("data-product-index");
+      eliminarProductoDelCarrito(productId);
+    }
+  });
+
+  // Itera sobre de los productos en el carrito y muestra cada uno
+  carrito.forEach((producto) => {
+    mostrarProductoEnCarrito(producto.productId, producto.quantity);
+  });
+});
+
+
 
 /* Funcionalidad del modal */
 
@@ -113,7 +200,7 @@ const formaPagoDiv = document.querySelector('#formaPago');
 
   // Ver forma de pago seleccionada
   function mostrarFormaPagoSeleccionada() {
-    let formaPagoSeleccionada = 'No se ha seleccionado una forma de pago';
+    let formaPagoSeleccionada = 'No se ha seleccionado una forma de pago.';
     if (radioTarjeta.checked) {
       formaPagoSeleccionada = 'Tarjeta de crédito';
     } else if (radioTransferencia.checked) {
