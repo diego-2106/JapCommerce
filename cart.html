@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="css/darkmode.css">
   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/font-awesome.min.css" rel="stylesheet">
@@ -51,127 +52,96 @@
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="#" id="logout">Cerrar Sesión</a>
             </div>
-        </li>
+          </li>
         </ul>
         <div class="mostrarUser" id="verUsuario"></div>
       </div>
       <!--modo oscuro-->
-        
       <button class="switchDark active" id="switch">
-        <span><i class='bx bx-sun' ></i></span>
-        <span><i class='bx bx-moon' ></i></span>
+        <span><i class='bx bx-sun'></i></span>
+        <span><i class='bx bx-moon'></i></span>
+      </button>
     </div>
   </nav>
 
-
   <main>
-    <div class="container">
-      <ul id="cart-items">
 
-      </ul>
-
-      <div>
-       <p>Tipo de envio </p>
-       <div class="form-check">
-        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-        <label class="form-check-label" for="flexRadioDefault1">
-          Premium 2 a 5 dias (15%)
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-        <label class="form-check-label" for="flexRadioDefault2">
-        Express 5 a 8 dias (7%)
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-        <label class="form-check-label" for="flexRadioDefault2">
-          Standard 12 a 15 dias (5%)
-        </label>
-      </div>
-
-   
-      <form action="">
-        <h3> Dirección de envio</h3>
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Calle</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        </div>
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Número</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        </div>
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Esquina</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        </div>
-      </form> 
-   
+    <div class="title-carrito">
+      <h2>Carrito de Compras</h2>
+      <p class="lead">Verás aquí los detalles de tu carrito.</p>
     </div>
 
-    <div>
-      <h3>Costos</h3>
-      <p>Subtotal : <span id="subtotal">$0</span></p>
-      <p>Costo de Envío: <span id="costoEnvio">$0</span></p>
-      <p>Total: <span id="total">$0</span></p>
-  </div>
-  
+    <div class="container">
+      <div id="cart-items">
+        <!-- Aquí se mostrarán los productos en el carrito -->
+      </div>
 
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+          <label class="form-check-label" for="flexRadioDefault2">
+            Express 5 a 8 días (7%)
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+          <label class="form-check-label" for="flexRadioDefault2">
+            Standard 12 a 15 días (5%)
+          </label>
+        </div>
 
-<!-- Punto 2 entrega 6 Forma de pago -->
-<h1>Forma de pago:</h1>
+      <!-- Punto 2 entrega 6 Forma de pago -->
+      <h2 class="pago-forma">Forma de pago:</h2>
 
-<div id="formaPago"> </div>
+      <div id="formaPago"> </div>
 
-<div id="btn-modal">
-  <button type="submit" id="verModal">Seleccionar</button>
+      <div class=" btnmodal" id="btn-modal">
+        
+        <button class="btn btn-primary" type="submit" id="verModal"><i class="bi bi-credit-card-fill"> </i>Seleccionar</i></button>
+        
+      </div>
+
+      <div id="neonEffect">
+        <div id="contenedorModal">
+          <form action="" id="formularioPago">
+            <h4>Elige tu forma de pago</h4>
+            <p><i class="bi bi-credit-card-2-front"></i> Tarjeta de Crédito <input class="form-check-input" type="radio" id="T-credito" name="metodoPago"> </p>
+            <p>Número de tarjeta * <input class="form-control" type="text" id="numeroTarjeta" required disabled placeholder="1234 1234 1234 1234"> </p>
+            <p>Código de seguridad * <input  class="form-control" type="text" id="codigoSeguridad" required disabled placeholder="CVV"> </p>
+            <p>Fecha de cencimiento *<input class="form-control" type="date" id="fechaVencimiento" required disabled > </p>
+            <p><i class="bi bi-bank"></i> Transferencia bancaria <input class="form-check-input" type="radio" id="T-bancaria" name="metodoPago"> </p>
+            <p>Inserte número de cuenta <input class="form-control" type="text" id="numeroCuenta" required disabled> </p>
+
+      <button class=" btn btn-primary" type="submit" id="ocultarModal"><i class="bi bi-check2"> </i> Confirmar y pagar </button>
+</form>
+
 </div>
-
-<div id="neonEffect">
-<div id="contenedorModal">
-  <form action="" id="formularioPago">
-    <p>Tarjeta de crédito <input type="radio" id="T-credito" name="metodoPago"> </p>
-    <p> Inserte número de tarjeta <input type="text" id="numeroTarjeta" required disabled> </p>
-    <p> Inserte código de seguridad <input type="text" id="codigoSeguridad" required disabled> </p>
-    <p> Inserte fecha de vencimiento <input type="date" id="fechaVencimiento" required disabled> </p> 
-
-    <p>Transferencia bancaria <input type="radio" id="T-bancaria" name="metodoPago"> </p>
-    <p> Inserte número de cuenta <input type="text" id="numeroCuenta" required disabled> </p>
-
-    <button type="submit" id="ocultarModal">Aceptar</button>
-  </form>
-
-</div>
-
 </div>
 <!-- Fin punto 2 entrega 6 Forma de pago -->
+</main>
 
+<footer class="text-muted">
+<div class="container">
+  <p class="float-end">
+    <a href="#">Volver arriba</a>
+  </p>
+  <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
+</div>
+</footer>
 
-  </main>
-
-  <footer class="text-muted">
-    <div class="container">
-      <p class="float-end">
-        <a href="#">Volver arriba</a>
-      </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
-    </div>
-  </footer>
-
-  <div id="spinner-wrapper">
-    <div class="lds-ring">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-  </div>
-  <script src="js/darkmode.js"></script>
-  <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/init.js"></script>
-  <script src="js/cart.js"></script>
-  <script src="js/index.js"></script>
+<div id="spinner-wrapper">
+<div class="lds-ring">
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
+</div>
+<script src="js/darkmode.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/init.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/index.js"></script>
 </body>
 
 </html>
