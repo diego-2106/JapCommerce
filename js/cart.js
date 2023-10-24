@@ -41,21 +41,51 @@ fetch(URL)
             `;
 
 
+           
             const cantidadInput = cartContainer.querySelector(`[data-product-index="${index}"]`);
             cantidadInput.addEventListener('input', (event) => {
                 const cantidad = parseInt(event.target.value);
                 const Subtotal = CalcularSubtotal(cantidad, precio);
-                subtotal += Subtotal;
+                subtotal += Subtotal - subtotalProducto;
 
-
+                subtotalProducto = Subtotal;
                 const subtotalSpan = cartContainer.querySelector(`#subtotalProducto${index}`);
                 subtotalSpan.textContent = `${producto.currency} ${Subtotal}`;
+
+                calcularTotales();
             });
         });
 
-        //No funciona porque no hay un elemento todavia pero lo dejamos para mas adelante
-        const totalSpan = document.getElementById("cart-total");
-        totalSpan.textContent = `Total: ${data.currency} ${subtotal}`;
+        function calcularTotales() {
+            const subtotalElement = document.getElementById('subtotal');
+            const costoEnvioElement = document.getElementById('costoEnvio');
+            const totalElement = document.getElementById('total');
+            const tipoEnvioRadios = document.querySelectorAll('input[name="flexRadioDefault"]');
+
+            let costoEnvio = 0;
+            let tipoEnvioPorcentaje = 0;
+
+            tipoEnvioRadios.forEach(radio => {
+                if (radio.checked) {
+                    if (radio.id === 'flexRadioDefault1') {
+                        tipoEnvioPorcentaje = 15;
+                    } else if (radio.id === 'flexRadioDefault2') {
+                        tipoEnvioPorcentaje = 7;
+                    } else if (radio.id === 'flexRadioDefault3') {
+                        tipoEnvioPorcentaje = 5;
+                    }
+                }
+            });
+
+            costoEnvio = subtotal * (tipoEnvioPorcentaje / 100);
+
+            const total = subtotal + costoEnvio;
+            subtotalElement.textContent = `$${subtotal.toFixed(2)}`;
+            costoEnvioElement.textContent = `$${costoEnvio.toFixed(2)}`;
+            totalElement.textContent = `$${total.toFixed(2)}`;
+        }
+
+        calcularTotales();
     });
 */
 document.addEventListener('DOMContentLoaded', () => {
@@ -146,6 +176,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+
+
+    
 /* Funcionalidad del modal */
 
 const btnVerModal = document.querySelector('#verModal');
