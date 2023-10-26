@@ -85,6 +85,75 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* Funcionalidad del modal */
+  /* Funcionalidad del modal */
+
+  const btnVerModal = document.querySelector('#verModal');
+  const btnOcultarModal = document.querySelector('#ocultarModal');
+  const formaPagoDiv = document.querySelector('#formaPago');
+  
+    const formularioPago = document.getElementById("formularioPago");
+    const radioTarjeta = document.getElementById("T-credito");
+    const radioTransferencia = document.getElementById("T-bancaria");
+    const numeroTarjeta = document.getElementById("numeroTarjeta");
+    const codigoSeguridad = document.getElementById("codigoSeguridad");
+    const fechaVencimiento = document.getElementById("fechaVencimiento");
+    const numeroCuenta = document.getElementById("numeroCuenta");
+      
+    //Evento ver modal
+    btnVerModal.addEventListener('click', (e) => {
+      e.preventDefault();
+      contenedorModal.classList.add('mostrar');
+    });
+  
+    //Evento ocultar modal
+    btnOcultarModal.addEventListener('click', (e) => {
+      e.preventDefault();
+      mostrarFormaPagoSeleccionada();
+      contenedorModal.classList.remove('mostrar');
+    });
+  
+    // Evento habilitar/deshabilitar campos
+    radioTarjeta.addEventListener("change", () => {
+      if (radioTarjeta.checked) {
+        numeroTarjeta.disabled = false;
+        codigoSeguridad.disabled = false;
+        fechaVencimiento.disabled = false;
+        numeroCuenta.disabled = true;
+        // Borra el contenido de los campos si se deselecciona
+        numeroCuenta.value = ""; 
+      }
+    });
+  
+    radioTransferencia.addEventListener("change", () => {
+      if (radioTransferencia.checked) {
+        numeroCuenta.disabled = false;
+        numeroTarjeta.disabled = true;
+        codigoSeguridad.disabled = true;
+        fechaVencimiento.disabled = true;
+        // Borra el contenido de los campos si se deselecciona
+        numeroTarjeta.value = "";
+        codigoSeguridad.value = "";
+        fechaVencimiento.value = "";
+      }
+    });
+  
+    // Ver forma de pago seleccionada
+    function mostrarFormaPagoSeleccionada() {
+      let formaPagoSeleccionada = 'No se ha seleccionado una forma de pago.';
+      if (radioTarjeta.checked) {
+        formaPagoSeleccionada = 'Tarjeta de crédito';
+      } else if (radioTransferencia.checked) {
+        formaPagoSeleccionada = 'Transferencia bancaria';
+      }
+      formaPagoDiv.textContent = formaPagoSeleccionada;
+    }
+    
+    // Forma de pago inicial
+    mostrarFormaPagoSeleccionada();
+
+
+
+
 fetch(API)
     .then((response) => {
         if (!response.ok) {
@@ -169,65 +238,6 @@ fetch(API)
 
     });
 
-  const formularioPago = document.getElementById("formularioPago");
-  const radioTarjeta = document.getElementById("T-credito");
-  const radioTransferencia = document.getElementById("T-bancaria");
-  const numeroTarjeta = document.getElementById("numeroTarjeta");
-  const codigoSeguridad = document.getElementById("codigoSeguridad");
-  const fechaVencimiento = document.getElementById("fechaVencimiento");
-  const numeroCuenta = document.getElementById("numeroCuenta");
-    
-  //Evento ver modal
-  btnVerModal.addEventListener('click', (e) => {
-    e.preventDefault();
-    contenedorModal.classList.add('mostrar');
-  });
-
-  //Evento ocultar modal
-  btnOcultarModal.addEventListener('click', (e) => {
-    e.preventDefault();
-    mostrarFormaPagoSeleccionada();
-    contenedorModal.classList.remove('mostrar');
-  });
-
-  // Evento habilitar/deshabilitar campos
-  radioTarjeta.addEventListener("change", () => {
-    if (radioTarjeta.checked) {
-      numeroTarjeta.disabled = false;
-      codigoSeguridad.disabled = false;
-      fechaVencimiento.disabled = false;
-      numeroCuenta.disabled = true;
-      // Borra el contenido de los campos si se deselecciona
-      numeroCuenta.value = ""; 
-    }
-  });
-
-  radioTransferencia.addEventListener("change", () => {
-    if (radioTransferencia.checked) {
-      numeroCuenta.disabled = false;
-      numeroTarjeta.disabled = true;
-      codigoSeguridad.disabled = true;
-      fechaVencimiento.disabled = true;
-      // Borra el contenido de los campos si se deselecciona
-      numeroTarjeta.value = "";
-      codigoSeguridad.value = "";
-      fechaVencimiento.value = "";
-    }
-  });
-
-  // Ver forma de pago seleccionada
-  function mostrarFormaPagoSeleccionada() {
-    let formaPagoSeleccionada = 'No se ha seleccionado una forma de pago.';
-    if (radioTarjeta.checked) {
-      formaPagoSeleccionada = 'Tarjeta de crédito';
-    } else if (radioTransferencia.checked) {
-      formaPagoSeleccionada = 'Transferencia bancaria';
-    }
-    formaPagoDiv.textContent = formaPagoSeleccionada;
-  }
-  
-  // Forma de pago inicial
-  mostrarFormaPagoSeleccionada();
 
   fetch(API)
     .then((response) => {
@@ -329,6 +339,4 @@ fetch(API)
 
     });
 
-const btnVerModal = document.querySelector('#verModal');
-const btnOcultarModal = document.querySelector('#ocultarModal');
-const formaPagoDiv = document.querySelector('#formaPago');
+ 
