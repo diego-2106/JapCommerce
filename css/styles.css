@@ -221,6 +221,13 @@ a.custom-card:hover {
   justify-content: end;
 }
 
+.product-titulo {
+  text-align: center;
+}
+.infoproduct-titulo {
+  text-align: center;
+  margin-bottom: 3rem;
+}
 .btn-eliminar button{
   width: 10rem;
 }
