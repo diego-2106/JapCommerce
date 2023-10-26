@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
       
 
       // Calcula el subtotal del producto
-      let subtotalProducto = productDetails.unitCost * quantity;
+      let subtotalProducto = productDetails.cost * quantity;
 
       // Crea un elemento HTML para mostrar el producto en el carrito
       let productoHTML = `
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="card-body">
                 <h4 class="card-title">${productDetails.name}</h4>
                 <p class="card-text">
-                    Precio Unidad: ${productDetails.currency} ${productDetails.unitCost}
+                    Precio Unidad: ${productDetails.currency} ${productDetails.cost}
                     <input type="number" min="1" value="1" class="input-cantidad form-control cantProd flex-grow" style="margin-top: 1rem;" />
                 </p>
                 Subtotal: <span id="subtotalProducto${productId}">${productDetails.currency} ${subtotalProducto}</span>
@@ -39,6 +39,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Agrega el producto al contenedor
       carritoContainer.innerHTML += productoHTML;
+
+
+      const inputCantidad = carritoContainer.querySelector(`[data-product-index="${productId}"] .input-cantidad`);
+
+// Escucha el evento de cambio en el input
+inputCantidad.addEventListener('change', function() {
+  // Obtiene la nueva cantidad ingresada
+  const nuevaCantidad = parseInt(inputCantidad.value);
+
+  // Calcula el nuevo subtotal
+  const nuevoSubtotal = productDetails.cost * nuevaCantidad;
+
+  // Actualiza el texto del subtotal
+  const subtotalSpan = document.getElementById(`subtotalProducto${productId}`);
+  subtotalSpan.textContent = `${productDetails.currency} ${nuevoSubtotal}`;
+
+  // Actualiza el subtotal global
+  subtotal += nuevoSubtotal;
+  // Puedes mostrar el subtotal global en algún lugar de tu página
+  // Agregando código adicional para hacerlo.
+  // Ejemplo: document.getElementById("subtotal-total").textContent = `Subtotal Total: ${productDetails.currency} ${subtotal}`;
+});
 
     } catch (error) {
       console.error("Error al obtener detalles del producto:", error);
