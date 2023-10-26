@@ -251,6 +251,17 @@ const formaPagoDiv = document.querySelector('#formaPago');
   mostrarFormaPagoSeleccionada();
 
   function finalizarCompra() {
+
+
+  const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+  // Verifica si el carrito está vacío
+  if (carrito.length === 0) {
+    alert("El carrito está vacío. Agrega productos antes de finalizar la compra.");
+    return;
+  }
+
+
     const direccionCalle = document.querySelector("#calle");
     const direccionNumero = document.querySelector("#numero");
     const direccionEsquina = document.querySelector("#esquina");
@@ -262,6 +273,7 @@ const formaPagoDiv = document.querySelector('#formaPago');
     const codigoSeguridad = document.getElementById("codigoSeguridad");
     const fechaVencimiento = document.getElementById("fechaVencimiento");
     const numeroCuenta = document.getElementById("numeroCuenta");
+
   
     // Validación de campos de dirección
     if (direccionCalle.value.trim() === "" || direccionNumero.value.trim() === "" || direccionEsquina.value.trim() === "") {
