@@ -1,93 +1,3 @@
-/*let productoCarrito = localStorage.getItem("carrito");
-let URL =  `https://japceibal.github.io/emercado-api/products/${productoCarrito}.json`;
-fetch(URL)
-    .then((response) => {
-        if (!response.ok) {
-            throw new Error("Error de solicitud");
-        }
-        return response.json();
-    })
-
-    .then((data) => {
-        let cartProd = data.articles;
-        let cartContainer = document.getElementById("cart-items");
-        console.log(cartProd)
-
-        let subtotal = 0;
-        function CalcularSubtotal(cantidad, precio) {
-            return cantidad * precio;
-        }
-
-        cartProd.forEach((producto, index) => {
-            let cantidad = producto.count;
-            let precio = producto.unitCost;
-            let subtotalProducto = CalcularSubtotal(cantidad, precio);
-            subtotal += subtotalProducto;
-
-            cartContainer.innerHTML += `
-            <div class="card d-flex flex-row align-items-center">
-            <img src="${producto.image}" alt="imagenDeProducto" width="200px" />
-            <div class="card-body">
-              <h5 class="card-title">Producto: ${producto.name}</h5>
-              <p class="card-text">
-                Precio Unidad: ${producto.currency} ${producto.unitCost}
-                <input type="number" class="input-cantidad form-control cantProd flex-grow" value="${cantidad}" min="1" data-product-index="${index}" />
-              </p>
-              Subtotal: <span id="subtotalProducto${index}">${producto.currency} ${subtotalProducto}</span>
-            </div>
-          </div>
-          
-          
-            `;
-
-
-           
-            const cantidadInput = cartContainer.querySelector(`[data-product-index="${index}"]`);
-            cantidadInput.addEventListener('input', (event) => {
-                const cantidad = parseInt(event.target.value);
-                const Subtotal = CalcularSubtotal(cantidad, precio);
-                subtotal += Subtotal - subtotalProducto;
-
-                subtotalProducto = Subtotal;
-                const subtotalSpan = cartContainer.querySelector(`#subtotalProducto${index}`);
-                subtotalSpan.textContent = `${producto.currency} ${Subtotal}`;
-
-                calcularTotales();
-            });
-        });
-
-        function calcularTotales() {
-            const subtotalElement = document.getElementById('subtotal');
-            const costoEnvioElement = document.getElementById('costoEnvio');
-            const totalElement = document.getElementById('total');
-            const tipoEnvioRadios = document.querySelectorAll('input[name="flexRadioDefault"]');
-
-            let costoEnvio = 0;
-            let tipoEnvioPorcentaje = 0;
-
-            tipoEnvioRadios.forEach(radio => {
-                if (radio.checked) {
-                    if (radio.id === 'flexRadioDefault1') {
-                        tipoEnvioPorcentaje = 15;
-                    } else if (radio.id === 'flexRadioDefault2') {
-                        tipoEnvioPorcentaje = 7;
-                    } else if (radio.id === 'flexRadioDefault3') {
-                        tipoEnvioPorcentaje = 5;
-                    }
-                }
-            });
-
-            costoEnvio = subtotal * (tipoEnvioPorcentaje / 100);
-
-            const total = subtotal + costoEnvio;
-            subtotalElement.textContent = `$${subtotal.toFixed(2)}`;
-            costoEnvioElement.textContent = `$${costoEnvio.toFixed(2)}`;
-            totalElement.textContent = `$${total.toFixed(2)}`;
-        }
-
-        calcularTotales();
-    });
-*/
 document.addEventListener('DOMContentLoaded', () => {
   // Recupera el carrito del almacenamiento local
   const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
@@ -174,16 +84,90 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-
-
-
-
-    
 /* Funcionalidad del modal */
+fetch(API)
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error("Error de solicitud");
+        }
+        return response.json();
+    })
+    .then((data) => {
+        let cartProd = data.articles;
+        let cartContainer = document.getElementById("cart-items");
+        console.log(cartProd);
 
-const btnVerModal = document.querySelector('#verModal');
-const btnOcultarModal = document.querySelector('#ocultarModal');
-const formaPagoDiv = document.querySelector('#formaPago');
+        let subtotal = 0;
+        function CalcularSubtotal(cantidad, precio) {
+            return cantidad * precio;
+        }
+
+        cartProd.forEach((producto, index) => {
+            let cantidad = producto.count;
+            let precio = producto.unitCost;
+            let subtotalProducto = CalcularSubtotal(cantidad, precio);
+            subtotal += subtotalProducto;
+
+            cartContainer.innerHTML += `
+            <div class="card d-flex flex-row align-items-center">
+            <img src="${producto.image}" alt="imagenDeProducto" width="200px" />
+            <div class="card-body">
+                <h5 class="card-title">Producto: ${producto.name}</h5>
+                <p class="card-text">
+                    Precio Unidad: ${producto.currency} ${producto.unitCost}
+                    <input type="number" class="input-cantidad form-control cantProd flex-grow" value="${cantidad}" min="1" data-product-index="${index}" />
+                </p>
+                Subtotal: <span id="subtotalProducto${index}">${producto.currency} ${subtotalProducto}</span>
+            </div>
+            </div>
+            `;
+
+            const cantidadInput = cartContainer.querySelector(`[data-product-index="${index}"]`);
+            cantidadInput.addEventListener('input', (event) => {
+                const cantidad = parseInt(event.target.value);
+                const Subtotal = CalcularSubtotal(cantidad, precio);
+                subtotal += Subtotal - subtotalProducto;
+
+                subtotalProducto = Subtotal;
+                const subtotalSpan = cartContainer.querySelector(`#subtotalProducto${index}`);
+                subtotalSpan.textContent = `${producto.currency} ${Subtotal}`;
+
+                calcularTotales();
+            });
+        });
+
+        function calcularTotales() {
+            const subtotalElement = document.getElementById('subtotal');
+            const costoEnvioElement = document.getElementById('costoEnvio');
+            const totalElement = document.getElementById('total');
+            const tipoEnvioRadios = document.querySelectorAll('input[name="flexRadioDefault"]');
+
+            let costoEnvio = 0;
+            let tipoEnvioPorcentaje = 0;
+
+            tipoEnvioRadios.forEach(radio => {
+                if (radio.checked) {
+                    if (radio.id === 'flexRadioDefault1') {
+                        tipoEnvioPorcentaje = 15;
+                    } else if (radio.id === 'flexRadioDefault2') {
+                        tipoEnvioPorcentaje = 7;
+                    } else if (radio.id === 'flexRadioDefault3') {
+                        tipoEnvioPorcentaje = 5;
+                    }
+                }
+            });
+
+            costoEnvio = subtotal * (tipoEnvioPorcentaje / 100);
+            const total = subtotal + costoEnvio;
+
+            subtotalElement.textContent = `$${subtotal.toFixed(2)}`;
+            costoEnvioElement.textContent = `$${costoEnvio.toFixed(2)}`;
+            totalElement.textContent = `$${total.toFixed(2)}`;
+        }
+
+        calcularTotales();
+
+    });
 
   const formularioPago = document.getElementById("formularioPago");
   const radioTarjeta = document.getElementById("T-credito");
@@ -244,3 +228,107 @@ const formaPagoDiv = document.querySelector('#formaPago');
   
   // Forma de pago inicial
   mostrarFormaPagoSeleccionada();
+
+  fetch(API)
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error("Error de solicitud");
+        }
+        return response.json();
+    })
+    .then((data) => {
+        let cartProd = data.articles;
+        let cartContainer = document.getElementById("cart-items");
+        console.log(cartProd);
+
+        let subtotal = 0;
+        function CalcularSubtotal(cantidad, precio) {
+            return cantidad * precio;
+        }
+
+        function actualizarSubtotal() {
+            subtotal = 0;
+            cartProd.forEach((producto, index) => {
+                let cantidad = producto.count;
+                let precio = producto.unitCost;
+                let subtotalProducto = CalcularSubtotal(cantidad, precio);
+                subtotal += subtotalProducto;
+
+                const subtotalSpan = document.getElementById(`subtotalProducto${index}`);
+                if (subtotalSpan) {
+                    subtotalSpan.textContent = `${producto.currency} ${subtotalProducto.toFixed(2)}`;
+                }
+            });
+        }
+
+        function calcularTotales() {
+            const subtotalElement = document.getElementById('subtotal');
+            const costoEnvioElement = document.getElementById('costoEnvio');
+            const totalElement = document.getElementById('total');
+            const tipoEnvioRadios = document.querySelectorAll('input[name="flexRadioDefault"]');
+
+            let costoEnvio = 0;
+            let tipoEnvioPorcentaje = 0;
+
+            tipoEnvioRadios.forEach(radio => {
+                if (radio.checked) {
+                    if (radio.id === 'flexRadioDefault1') {
+                        tipoEnvioPorcentaje = 15;
+                    } else if (radio.id === 'flexRadioDefault2') {
+                        tipoEnvioPorcentaje = 7;
+                    } else if (radio.id === 'flexRadioDefault3') {
+                        tipoEnvioPorcentaje = 5;
+                    }
+                }
+            });
+
+            costoEnvio = subtotal * (tipoEnvioPorcentaje / 100);
+            const total = subtotal + costoEnvio;
+
+            subtotalElement.textContent = `$${subtotal.toFixed(2)}`;
+            costoEnvioElement.textContent = `$${costoEnvio.toFixed(2)}`;
+            totalElement.textContent = `$${total.toFixed(2)}`;
+        }
+
+        cartProd.forEach((producto, index) => {
+            let cantidad = producto.count;
+            let precio = producto.unitCost;
+            let subtotalProducto = CalcularSubtotal(cantidad, precio);
+            subtotal += subtotalProducto;
+
+            cartContainer.innerHTML += `
+                <div class="card d-flex flex-row align-items-center">
+                    <img src="${producto.image}" alt="imagenDeProducto" width="200px" />
+                    <div class="card-body">
+                        <h5 class="card-title">Producto: ${producto.name}</h5>
+                        <p class="card-text">
+                            Precio Unidad: ${producto.currency} ${producto.unitCost}
+                            <input type="number" class="input-cantidad form-control cantProd flex-grow" value="${cantidad}" min="1" data-product-index="${index}" />
+                        </p>
+                        Subtotal: <span id="subtotalProducto${index}">${producto.currency} ${subtotalProducto.toFixed(2)}</span>
+                    </div>
+                </div>
+            `;
+
+            const cantidadInput = cartContainer.querySelector(`[data-product-index="${index}"]`);
+            cantidadInput.addEventListener('input', (event) => {
+                const cantidad = parseInt(event.target.value);
+                const Subtotal = CalcularSubtotal(cantidad, precio);
+                subtotal += Subtotal - subtotalProducto;
+
+                subtotalProducto = Subtotal;
+                const subtotalSpan = cartContainer.querySelector(`#subtotalProducto${index}`);
+                subtotalSpan.textContent = `${producto.currency} ${Subtotal.toFixed(2)}`;
+
+                calcularTotales();
+            });
+        });
+
+        actualizarSubtotal();
+        calcularTotales();
+
+    });
+
+const btnVerModal = document.querySelector('#verModal');
+const btnOcultarModal = document.querySelector('#ocultarModal');
+const formaPagoDiv = document.querySelector('#formaPago');

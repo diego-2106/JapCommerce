@@ -66,84 +66,88 @@
 
   <main>
 
-    <div class="title-carrito">
-      <h2>Carrito de Compras</h2>
-      <p class="lead">Verás aquí los detalles de tu carrito.</p>
+    <div class="container">
+      <ul id="cart-items">
+
+      </ul>
+
+      <div>
+          <p>Tipo de envio </p>
+          <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+              <label class="form-check-label" for="flexRadioDefault1">
+                  Premium 2 a 5 dias (15%)
+              </label>
+          </div>
+          <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+              <label class="form-check-label" for="flexRadioDefault2">
+                  Express 5 a 8 dias (7%)
+              </label>
+          </div>
+          <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
+              <label class="form-check-label" for="flexRadioDefault3">
+                  Standard 12 a 15 dias (5%)
+              </label>
+          </div>
+
+          <form action="">
+              <h3> Dirección de envio</h3>
+              <div class="mb-3">
+                  <label for="calle" class="form-label">Calle</label>
+                  <input type="text" class="form-control" id="calle" aria-describedby="emailHelp">
+              </div>
+              <div class="mb-3">
+                  <label for="numero" class="form-label">Número</label>
+                  <input type="text" class="form-control" id="numero" aria-describedby="emailHelp">
+              </div>
+              <div class="mb-3">
+                  <label for="esquina" class="form-label">Esquina</label>
+                  <input type="text" class="form-control" id="esquina" aria-describedby="emailHelp">
+              </div>
+          </form> 
+
+      </div>
+
+      <div>
+          <h3>Costos</h3>
+          <p>Subtotal : <span id="subtotal">$0</span></p>
+          <p>Costo de Envío: <span id="costoEnvio">$0</span></p>
+          <p>Total: <span id="total">$0</span></p>
+      </div>
+    </form> 
+
+    <!-- Punto 2 entrega 6 Forma de pago -->
+    <h3 class="pago-forma">Forma de pago:</h3>
+
+    <div id="formaPago"> </div>
+
+    <div class=" btnmodal" id="btn-modal">
+      
+      <button class="btn btn-primary" type="submit" id="verModal"><i class="bi bi-credit-card-fill"> </i>Seleccionar</i></button>
+      
     </div>
 
-    <div class="container">
-      <div id="cart-items">
-        <!-- Aquí se mostrarán los productos en el carrito -->
-      </div>
+    <div id="neonEffect">
+      <div id="contenedorModal">
+        <form action="" id="formularioPago">
+          <h4>Elige tu forma de pago</h4>
+          <p><i class="bi bi-credit-card-2-front"></i> Tarjeta de Crédito <input class="form-check-input" type="radio" id="T-credito" name="metodoPago"> </p>
+          <p>Número de tarjeta * <input class="form-control" type="text" id="numeroTarjeta" required disabled placeholder="1234 1234 1234 1234"> </p>
+          <p>Código de seguridad * <input  class="form-control" maxlength="3" type="text" id="codigoSeguridad" required disabled placeholder="CVV"> </p>
+          <p>Fecha de vencimiento *<input class="form-control" type="date" id="fechaVencimiento" required disabled > </p>
+          <p><i class="bi bi-bank"></i> Transferencia bancaria <input class="form-check-input" type="radio" id="T-bancaria" name="metodoPago"> </p>
+          <p>Inserte número de cuenta <input class="form-control" type="text" id="numeroCuenta" required disabled> </p>
 
-      <div class="envios">
-        <h3>Tipo de envío </h3>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-          <label class="form-check-label" for="flexRadioDefault1">
-            Premium 2 a 5 días (15%)
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-          <label class="form-check-label" for="flexRadioDefault2">
-            Express 5 a 8 días (7%)
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-          <label class="form-check-label" for="flexRadioDefault2">
-            Standard 12 a 15 días (5%)
-          </label>
-        </div>
-
-        <form class="formulario" action="">
-          <h3> Dirección de envio</h3>
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Calle</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Número</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Esquina</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          </div>
-  
-        
-        </form> 
-
-      <!-- Punto 2 entrega 6 Forma de pago -->
-      <h3 class="pago-forma">Forma de pago:</h3>
-
-      <div id="formaPago"> </div>
-
-      <div class=" btnmodal" id="btn-modal">
-        
-        <button class="btn btn-primary" type="submit" id="verModal"><i class="bi bi-credit-card-fill"> </i>Seleccionar</i></button>
-        
-      </div>
-
-      <div id="neonEffect">
-        <div id="contenedorModal">
-          <form action="" id="formularioPago">
-            <h4>Elige tu forma de pago</h4>
-            <p><i class="bi bi-credit-card-2-front"></i> Tarjeta de Crédito <input class="form-check-input" type="radio" id="T-credito" name="metodoPago"> </p>
-            <p>Número de tarjeta * <input class="form-control" type="text" id="numeroTarjeta" required disabled placeholder="1234 1234 1234 1234"> </p>
-            <p>Código de seguridad * <input  class="form-control" maxlength="3" type="text" id="codigoSeguridad" required disabled placeholder="CVV"> </p>
-            <p>Fecha de cencimiento *<input class="form-control" type="date" id="fechaVencimiento" required disabled > </p>
-            <p><i class="bi bi-bank"></i> Transferencia bancaria <input class="form-check-input" type="radio" id="T-bancaria" name="metodoPago"> </p>
-            <p>Inserte número de cuenta <input class="form-control" type="text" id="numeroCuenta" required disabled> </p>
-
-      <button class=" btn btn-primary" type="submit" id="ocultarModal"><i class="bi bi-check2"> </i> Confirmar y pagar </button>
+    <button class=" btn btn-primary" type="submit" id="ocultarModal"><i class="bi bi-check2"> </i> Confirmar y pagar </button>
 </form>
 
 </div>
 </div>
 <!-- Fin punto 2 entrega 6 Forma de pago -->
-</main>
+  </div>
+</main>       
 
 <footer class="text-muted">
 <div class="container">
