@@ -82,6 +82,10 @@ document.addEventListener('DOMContentLoaded', () => {
   carrito.forEach((producto) => {
     mostrarProductoEnCarrito(producto.productId, producto.quantity);
   });
+
+
+  const btnConfirmarCompra = document.getElementById("finalizarCompra");
+  btnConfirmarCompra.addEventListener("click", finalizarCompra);
 });
 
 /* Funcionalidad del modal */
@@ -338,5 +342,86 @@ fetch(API)
         calcularTotales();
 
     });
+
+    function finalizarCompra() {
+
+
+      const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    
+      // Verifica si el carrito está vacío
+      if (carrito.length === 0) {
+        alert("El carrito está vacío. Agrega productos antes de finalizar la compra.");
+        return;
+      }
+    
+    
+        const direccionCalle = document.querySelector("#calle");
+        const direccionNumero = document.querySelector("#numero");
+        const direccionEsquina = document.querySelector("#esquina");
+        const formaEnvioRadios = document.querySelectorAll('input[name="flexRadioDefault"]');
+        const cantidadInputs = document.querySelectorAll('.input-cantidad');
+        const formaPagoTarjeta = document.getElementById("T-credito");
+        const formaPagoTransferencia = document.getElementById("T-bancaria");
+        const numeroTarjeta = document.getElementById("numeroTarjeta");
+        const codigoSeguridad = document.getElementById("codigoSeguridad");
+        const fechaVencimiento = document.getElementById("fechaVencimiento");
+        const numeroCuenta = document.getElementById("numeroCuenta");
+    
+      
+        // Validación de campos de dirección
+        if (direccionCalle.value.trim() === "" || direccionNumero.value.trim() === "" || direccionEsquina.value.trim() === "") {
+          alert("Los campos de dirección no pueden estar vacíos.");
+          return;
+        }
+      
+        // Validación de forma de envío
+        let formaEnvioSeleccionada = false;
+        formaEnvioRadios.forEach((radio) => {
+          if (radio.checked) {
+            formaEnvioSeleccionada = true;
+          }
+        });
+        if (!formaEnvioSeleccionada) {
+          alert("Debes seleccionar una forma de envío.");
+          return;
+        }
+      
+        // Validación de cantidad de productos
+        let cantidadValida = true;
+        cantidadInputs.forEach((input) => {
+          const cantidad = parseInt(input.value);
+          if (isNaN(cantidad) || cantidad <= 0) {
+            cantidadValida = false;
+          }
+        });
+        if (!cantidadValida) {
+          alert("La cantidad para cada artículo debe ser mayor a 0.");
+          return;
+        }
+      
+        // Validación de forma de pago
+        if (!formaPagoTarjeta.checked && !formaPagoTransferencia.checked) {
+          alert("Debes seleccionar una forma de pago.");
+          return;
+        }
+      
+        // Validación de campos de forma de pago
+        if (formaPagoTarjeta.checked && (numeroTarjeta.value.trim() === "" || codigoSeguridad.value.trim() === "" || fechaVencimiento.value.trim() === "")) {
+          alert("Los campos de tarjeta de crédito no pueden estar vacíos.");
+          return;
+        }
+      
+        if (formaPagoTransferencia.checked && numeroCuenta.value.trim() === "") {
+          alert("Debes insertar un número de cuenta para la transferencia bancaria.");
+          return;
+        }
+      
+        // Si todas las validaciones pasan, puedes continuar con el proceso de compra
+        alert("Compra confirmada. ¡Gracias por tu compra!");
+      }
+    
+    
+    
+    
 
  
