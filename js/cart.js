@@ -8,13 +8,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // Función para mostrar un producto en el carrito
   async function mostrarProductoEnCarrito(productId, quantity) {
     try {
-      
       let response = await fetch(`https://japceibal.github.io/emercado-api/products/${productId}.json`);
       if (!response.ok) {
         throw new Error("Error de solicitud");
       }
       let productDetails = await response.json();
-      
 
       // Calcula el subtotal del producto
       let subtotalProducto = productDetails.cost * quantity;
@@ -27,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <h4 class="card-title">${productDetails.name}</h4>
                 <p class="card-text">
                     Precio Unidad: ${productDetails.currency} ${productDetails.cost}
-                    <input type="number" min="1" value="1" class="input-cantidad form-control cantProd flex-grow" style="margin-top: 1rem;" />
+                    <input type="number" min="1" value="${quantity}" class="input-cantidad form-control cantProd flex-grow" style="margin-top: 1rem;" />
                 </p>
                 Subtotal: <span id="subtotalProducto${productId}">${productDetails.currency} ${subtotalProducto}</span>
                 <div class="btn-eliminar">
@@ -40,28 +38,28 @@ document.addEventListener('DOMContentLoaded', () => {
       // Agrega el producto al contenedor
       carritoContainer.innerHTML += productoHTML;
 
-
       const inputCantidad = carritoContainer.querySelector(`[data-product-index="${productId}"] .input-cantidad`);
 
-// Escucha el evento de cambio en el input
-inputCantidad.addEventListener('change', function() {
-  // Obtiene la nueva cantidad ingresada
-  const nuevaCantidad = parseInt(inputCantidad.value);
+      // Escucha el evento de cambio en el input
+      inputCantidad.addEventListener('change', function() {
+        // Obtiene la nueva cantidad ingresada
+        const nuevaCantidad = parseInt(inputCantidad.value);
 
-  // Calcula el nuevo subtotal
-  const nuevoSubtotal = productDetails.cost * nuevaCantidad;
+        // Calcula el nuevo subtotal
+        const nuevoSubtotal = productDetails.cost * nuevaCantidad;
 
-  // Actualiza el texto del subtotal
-  const subtotalSpan = document.getElementById(`subtotalProducto${productId}`);
-  subtotalSpan.textContent = `${productDetails.currency} ${nuevoSubtotal}`;
+        // Actualiza el texto del subtotal
+        const subtotalSpan = document.getElementById(`subtotalProducto${productId}`);
+        subtotalSpan.textContent = `${productDetails.currency} ${nuevoSubtotal}`;
 
-  // Actualiza el subtotal global
-  subtotal += nuevoSubtotal;
-  // Puedes mostrar el subtotal global en algún lugar de tu página
-  // Agregando código adicional para hacerlo.
-  // Ejemplo: document.getElementById("subtotal-total").textContent = `Subtotal Total: ${productDetails.currency} ${subtotal}`;
-});
-
+        // Actualiza el subtotal global
+        subtotal = carrito.reduce((acc, producto) => {
+          const inputCantidad = carritoContainer.querySelector(`[data-product-index="${producto.productId}"] .input-cantidad`);
+          const nuevaCantidad = parseInt(inputCantidad.value);
+          return acc + productDetails.cost * nuevaCantidad;
+        }, 0);
+        calcularCostoEnvio();
+      });
     } catch (error) {
       console.error("Error al obtener detalles del producto:", error);
     }
@@ -70,24 +68,19 @@ inputCantidad.addEventListener('change', function() {
   function eliminarProductoDelCarrito(productId) {
     // Encuentra el índice del producto en el carrito
     const productoIndex = carrito.findIndex((producto) => producto.productId === productId);
-  
-    if (productoIndex !== -1) { // Comprueba si se encontró un índice válido
-      // aca refiere a todo lo que engloba a productoHTML
-      const productoElement = document.querySelector(`[data-product-index="${productId}"]`);
-      
-      if (productoElement && productoElement.parentElement) { // Comprueba si el elemento existe
 
+    if (productoIndex !== -1) {
+      const productoElement = document.querySelector(`[data-product-index="${productId}"]`);
+      if (productoElement && productoElement.parentElement) {
         // Elimina el producto del carrito
-        carrito.splice(productoIndex, 1); // el splice recibe 2 valores como argumento
-        //el primer valor es el elemento que vas a borrar y el segundo valor es 
-        //la cantidad de elementos que vos vas a eliminar despues del primero
-        // en este caso es como si pusieras (1,1) solo borra 1 elemento
+        carrito.splice(productoIndex, 1);
 
         // Elimina el elemento HTML del producto del carrito
         productoElement.parentElement.removeChild(productoElement);
-        
+
         // Actualiza el almacenamiento local
         localStorage.setItem("carrito", JSON.stringify(carrito));
+        calcularCostoEnvio();
       }
     }
   }
@@ -105,14 +98,55 @@ inputCantidad.addEventListener('change', function() {
     mostrarProductoEnCarrito(producto.productId, producto.quantity);
   });
 
-
   const btnConfirmarCompra = document.getElementById("finalizarCompra");
   btnConfirmarCompra.addEventListener("click", finalizarCompra);
+
+  // Función para calcular el costo de envío y actualizar los totales
+  function calcularCostoEnvio() {
+    let costoEnvio = 0;
+
+    // Obtiene el tipo de envío seleccionado
+    let tipoEnvioPorcentaje = 0;
+    tipoEnvioRadios.forEach(radio => {
+      if (radio.checked) {
+        if (radio.id === 'flexRadioDefault1') {
+          tipoEnvioPorcentaje = 15;
+        } else if (radio.id === 'flexRadioDefault2') {
+          tipoEnvioPorcentaje = 7;
+        } else if (radio.id === 'flexRadioDefault3') {
+          tipoEnvioPorcentaje = 5;
+        }
+      }
+    });
+
+    // Calcula el costo de envío en base al nuevo subtotal
+    costoEnvio = (subtotal * tipoEnvioPorcentaje) / 100;
+
+    const subtotalSpan = document.getElementById('subtotalCompra'); // Agrega esta línea
+  subtotalSpan.textContent = `$${subtotal.toFixed(2)}`; // Agrega esta línea
+    // Actualiza los elementos HTML con los valores calculados
+    const costoEnvioSpan = document.getElementById('costoEnvio');
+    costoEnvioSpan.textContent = `$${costoEnvio.toFixed(2)}`;
+
+    
+    const total = subtotal + costoEnvio;
+    const totalSpan = document.getElementById('precioTotal');
+    totalSpan.textContent = `$${total.toFixed(2)}`;
+  }
+
+  const tipoEnvioRadios = document.querySelectorAll('input[name="flexRadioDefault"]');
+  tipoEnvioRadios.forEach(radio => {
+    radio.addEventListener('change', calcularCostoEnvio);
+  });
+
+  calcularCostoEnvio();
 });
 
-/* Funcionalidad del modal */
-  /* Funcionalidad del modal */
 
+
+
+
+/* Funcionalidad del modal */
   const btnVerModal = document.querySelector('#verModal');
   const btnOcultarModal = document.querySelector('#ocultarModal');
   const formaPagoDiv = document.querySelector('#formaPago');
@@ -179,194 +213,7 @@ inputCantidad.addEventListener('change', function() {
 
 
 
-
-fetch(API)
-    .then((response) => {
-        if (!response.ok) {
-            throw new Error("Error de solicitud");
-        }
-        return response.json();
-    })
-    .then((data) => {
-        let cartProd = data.articles;
-        let cartContainer = document.getElementById("cart-items");
-        console.log(cartProd);
-
-        let subtotal = 0;
-        function CalcularSubtotal(cantidad, precio) {
-            return cantidad * precio;
-        }
-
-        cartProd.forEach((producto, index) => {
-            let cantidad = producto.count;
-            let precio = producto.unitCost;
-            let subtotalProducto = CalcularSubtotal(cantidad, precio);
-            subtotal += subtotalProducto;
-
-            cartContainer.innerHTML += `
-            <div class="card d-flex flex-row align-items-center">
-            <img src="${producto.image}" alt="imagenDeProducto" width="200px" />
-            <div class="card-body">
-                <h5 class="card-title">Producto: ${producto.name}</h5>
-                <p class="card-text">
-                    Precio Unidad: ${producto.currency} ${producto.unitCost}
-                    <input type="number" class="input-cantidad form-control cantProd flex-grow" value="${cantidad}" min="1" data-product-index="${index}" />
-                </p>
-                Subtotal: <span id="subtotalProducto${index}">${producto.currency} ${subtotalProducto}</span>
-            </div>
-            </div>
-            `;
-
-            const cantidadInput = cartContainer.querySelector(`[data-product-index="${index}"]`);
-            cantidadInput.addEventListener('input', (event) => {
-                const cantidad = parseInt(event.target.value);
-                const Subtotal = CalcularSubtotal(cantidad, precio);
-                subtotal += Subtotal - subtotalProducto;
-
-                subtotalProducto = Subtotal;
-                const subtotalSpan = cartContainer.querySelector(`#subtotalProducto${index}`);
-                subtotalSpan.textContent = `${producto.currency} ${Subtotal}`;
-
-                calcularTotales();
-            });
-        });
-
-        function calcularTotales() {
-            const subtotalElement = document.getElementById('subtotal');
-            const costoEnvioElement = document.getElementById('costoEnvio');
-            const totalElement = document.getElementById('total');
-            const tipoEnvioRadios = document.querySelectorAll('input[name="flexRadioDefault"]');
-
-            let costoEnvio = 0;
-            let tipoEnvioPorcentaje = 0;
-
-            tipoEnvioRadios.forEach(radio => {
-                if (radio.checked) {
-                    if (radio.id === 'flexRadioDefault1') {
-                        tipoEnvioPorcentaje = 15;
-                    } else if (radio.id === 'flexRadioDefault2') {
-                        tipoEnvioPorcentaje = 7;
-                    } else if (radio.id === 'flexRadioDefault3') {
-                        tipoEnvioPorcentaje = 5;
-                    }
-                }
-            });
-
-            costoEnvio = subtotal * (tipoEnvioPorcentaje / 100);
-            const total = subtotal + costoEnvio;
-
-            subtotalElement.textContent = `$${subtotal.toFixed(2)}`;
-            costoEnvioElement.textContent = `$${costoEnvio.toFixed(2)}`;
-            totalElement.textContent = `$${total.toFixed(2)}`;
-        }
-
-        calcularTotales();
-
-    });
-
-
-  fetch(API)
-    .then((response) => {
-        if (!response.ok) {
-            throw new Error("Error de solicitud");
-        }
-        return response.json();
-    })
-    .then((data) => {
-        let cartProd = data.articles;
-        let cartContainer = document.getElementById("cart-items");
-        console.log(cartProd);
-
-        let subtotal = 0;
-        function CalcularSubtotal(cantidad, precio) {
-            return cantidad * precio;
-        }
-
-        function actualizarSubtotal() {
-            subtotal = 0;
-            cartProd.forEach((producto, index) => {
-                let cantidad = producto.count;
-                let precio = producto.unitCost;
-                let subtotalProducto = CalcularSubtotal(cantidad, precio);
-                subtotal += subtotalProducto;
-
-                const subtotalSpan = document.getElementById(`subtotalProducto${index}`);
-                if (subtotalSpan) {
-                    subtotalSpan.textContent = `${producto.currency} ${subtotalProducto.toFixed(2)}`;
-                }
-            });
-        }
-
-        function calcularTotales() {
-            const subtotalElement = document.getElementById('subtotal');
-            const costoEnvioElement = document.getElementById('costoEnvio');
-            const totalElement = document.getElementById('total');
-            const tipoEnvioRadios = document.querySelectorAll('input[name="flexRadioDefault"]');
-
-            let costoEnvio = 0;
-            let tipoEnvioPorcentaje = 0;
-
-            tipoEnvioRadios.forEach(radio => {
-                if (radio.checked) {
-                    if (radio.id === 'flexRadioDefault1') {
-                        tipoEnvioPorcentaje = 15;
-                    } else if (radio.id === 'flexRadioDefault2') {
-                        tipoEnvioPorcentaje = 7;
-                    } else if (radio.id === 'flexRadioDefault3') {
-                        tipoEnvioPorcentaje = 5;
-                    }
-                }
-            });
-
-            costoEnvio = subtotal * (tipoEnvioPorcentaje / 100);
-            const total = subtotal + costoEnvio;
-
-            subtotalElement.textContent = `$${subtotal.toFixed(2)}`;
-            costoEnvioElement.textContent = `$${costoEnvio.toFixed(2)}`;
-            totalElement.textContent = `$${total.toFixed(2)}`;
-        }
-
-        cartProd.forEach((producto, index) => {
-            let cantidad = producto.count;
-            let precio = producto.unitCost;
-            let subtotalProducto = CalcularSubtotal(cantidad, precio);
-            subtotal += subtotalProducto;
-
-            cartContainer.innerHTML += `
-                <div class="card d-flex flex-row align-items-center">
-                    <img src="${producto.image}" alt="imagenDeProducto" width="200px" />
-                    <div class="card-body">
-                        <h5 class="card-title">Producto: ${producto.name}</h5>
-                        <p class="card-text">
-                            Precio Unidad: ${producto.currency} ${producto.unitCost}
-                            <input type="number" class="input-cantidad form-control cantProd flex-grow" value="${cantidad}" min="1" data-product-index="${index}" />
-                        </p>
-                        Subtotal: <span id="subtotalProducto${index}">${producto.currency} ${subtotalProducto.toFixed(2)}</span>
-                    </div>
-                </div>
-            `;
-
-            const cantidadInput = cartContainer.querySelector(`[data-product-index="${index}"]`);
-            cantidadInput.addEventListener('input', (event) => {
-                const cantidad = parseInt(event.target.value);
-                const Subtotal = CalcularSubtotal(cantidad, precio);
-                subtotal += Subtotal - subtotalProducto;
-
-                subtotalProducto = Subtotal;
-                const subtotalSpan = cartContainer.querySelector(`#subtotalProducto${index}`);
-                subtotalSpan.textContent = `${producto.currency} ${Subtotal.toFixed(2)}`;
-
-                calcularTotales();
-            });
-        });
-
-        actualizarSubtotal();
-        calcularTotales();
-
-    });
-
     function finalizarCompra() {
-
 
       const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
     
@@ -439,11 +286,13 @@ fetch(API)
         }
       
         // Si todas las validaciones pasan, puedes continuar con el proceso de compra
-        alert("Compra confirmada. ¡Gracias por tu compra!");
+        success();
       }
-    
-    
-    
-    
 
- 
+      function success() {
+        Swal.fire(
+            'Éxito',
+            'Tu compra se ha realizado con éxito.',
+            'success'
+          )
+    }
