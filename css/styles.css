@@ -428,3 +428,41 @@ body {
 #costosDiv span#precioTotal {
   color: #DC3545;
 }
+
+#clearRangeFilter, #Ver-condiciones, footer a{
+  text-decoration: none;
+}
+
+#vender, #related-products{
+  margin: 3%;
+}
+
+/*-------------------Diseño del carrusel------------------*/
+
+.images-product {
+  margin: 0 auto;
+  display: flex;
+
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.images-product img {
+  width: 0;
+  flex-grow: 1;
+  object-fit: cover;
+  opacity: .8;
+  transition: .5s ease;
+  
+}
+
+.images-product img:hover {
+  cursor: crosshair;
+  width: 80%;
+  opacity: 1;
+  filter: contrast(120%);
+}
+
+/*-------------------Fin diseño del carrusel------------------*/

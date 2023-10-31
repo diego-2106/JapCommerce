@@ -11,7 +11,7 @@ async function showProductsDetails() {
         const product = await response.json();
 
         let productDetailsHTML = `
-        <div class="contenido container">
+        <div class="contenido container" id="product-div-dark">
         <div class="row">
         <div class="col-md-6">
             <h2 class="h2-prodname">${product.name}</h2>

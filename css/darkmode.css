@@ -44,11 +44,14 @@
     left: unset;
     right: 0;
 }
-    body.dark {
+
+/*-------------------Diseño del body y del main------------------*/
+    body.dark, body.dark main {
         background: #4D4D4D;
         color: #fff;
     }
 
+/*-------------------Diseño de los elementos de todas las páginas------------------*/
     body.dark #autos,
     body.dark #juguetes,
     body.dark #muebles,
@@ -56,7 +59,8 @@
     body.dark .list-group,
     body.dark .comment,
     body.dark .btn-light,
-    body.dark #contenedorModal.mostrar form
+    body.dark #contenedorModal.mostrar form,
+    body.dark #product-div-dark
     {
         background-color: #000000;
         color: #fff;
@@ -66,38 +70,39 @@
         background-color: rgb(34, 34, 34);
     }
 
+    body.dark .btn-light {
+        border-color: #4D4D4D;
+    }
+
+    /*------Se le quita la propiedad important al boostrap para que aplique los cambios-------*/
+
+body.dark .bg-light {
+    background-color: unset !important;
+}
+
+
+/*-------------------Diseño del dropdown menú------------------*/
+
+body.dark .dropdown-menu, body.dark .colordark {
+    border-color: #4D4D4D;
+    background-color:  #212529;
+    color: #fff;
+    
+}
+
+/*-------------------Diseño de los a ------------------*/
+
+body.dark #clearRangeFilter, body.dark #Ver-condiciones, body.dark footer a {
+    color: aqua;
+}
+
+/*-------------------Diseño del footer------------------*/
     body.dark footer {
         background-color: #000000;
         padding: 1%;
+       
     }
-    
 
-/*-------------------Diseño del carrusel------------------*/
-
-.images-product {
-    margin: 0 auto;
-    display: flex;
-
-    width: 100%;
-    max-width: 600px;
-    height: auto;
-    margin: 0 auto;
-}
-
-.images-product img {
-    width: 0;
-    flex-grow: 1;
-    object-fit: cover;
-    opacity: .8;
-    transition: .5s ease;
-    
-}
-
-.images-product img:hover {
-    cursor: crosshair;
-    width: 80%;
-    opacity: 1;
-    filter: contrast(120%);
-}
-
-/*-------------------Fin diseño del carrusel------------------*/
+    body.dark footer p {
+        color: #ffffff;
+    }
