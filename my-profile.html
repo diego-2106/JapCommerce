@@ -81,11 +81,11 @@
                         </a>
                         <!-- El contenido del menú desplegable va dentro del siguiente div -->
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item colordark" href="my-profile.html">Mi Perfil</a>
+                            <a class="dropdown-item" href="my-profile.html">Mi Perfil</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item colordark" href="cart.html">Mi Carrito</a>
+                            <a class="dropdown-item" href="cart.html">Mi Carrito</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item colordark" href="#" id="logout">Cerrar Sesión</a>
+                            <a class="dropdown-item" href="#" id="logout">Cerrar Sesión</a>
                         </div>
                     </li>
                 </ul>
@@ -104,16 +104,16 @@
                 <div class="row">
                     <div class="col-12 col-md-3 col-xl-2">
                         <div>
-                            <img src="img/default-avatar.svg" id="currentAvatarImage" class="avatar-image" alt="">
+                            <img src="img/img_perfil.png" id="currentAvatarImage" class="avatar-image" alt="">
                         </div>
                         <div class="text-center p-2">
-                            <a href="#" data-toggle="modal" data-target="#avatarSelectionForm">Seleccionar</a>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#avatarSelectionModal">Seleccionar</a>
                         </div>
                     </div>
                     <div class="col-12 col-md-9 col-xl-10">
                         <div class="row">
                             <div class="col-12 col-md-6 pb-4">
-                                <label for="firstName">Primer nombre</label>
+                                <label for="firstName">Nombre*</label>
                                 <input type="text" class="form-control" id="firstName" required>
                             </div>
                             <div class="col-12 col-md-6 pb-4">
@@ -123,7 +123,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12 col-md-6 pb-4">
-                                <label for="lastName1">Primer apellido</label>
+                                <label for="lastName1">Apellido*</label>
                                 <input type="text" class="form-control" id="lastName1" required>
                             </div>
                             <div class="col-12 col-md-6 pb-4">
@@ -133,8 +133,8 @@
                         </div>
                         <div class="row">
                             <div class="col-12 col-lg-6 pb-4">
-                                <label for="email">Email</label>
-                                <input type="email" class="form-control" id="email" required>
+                                <label for="email">E-mail*</label>
+                                <input type="email" class="form-control" id="email" required readonly>
                             </div>
                         </div>
                         <div class="row">
@@ -155,29 +155,25 @@
                 </div>
             </form>
         </div>
-
-        <div class="modal fade" id="avatarSelectionForm" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+        <!-- Modal -->
+        <div class="modal fade" id="avatarSelectionModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
             <form id="avatarSelectionForm">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="modalLabel">Selecciona una imagen</h5>
-                            <button class="btn bg-transparent" data-dismiss="modal"
-                                style="margin-left: -40px; z-index: 100;">
-                                <i class="fa fa-times"></i>
-                            </button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <div class="col p-4">
-                                <img src="./img/Default Avatar.svg" alt="" class="avatar-image"
-                                    id="selectedAvatarImage">
+                                <img src="img/img_perfil.png" alt="" class="avatar-image" id="selectedAvatarImage">
                             </div>
                             <div class="col mb-2">
                                 <div class="btn-group w-100">
-                                    <input id="btnAvatarFile" type="button" value="Archivo"
-                                        class="btn btn-outline-secondary w-50 active" />
-                                    <input id="btnAvatarURL" type="button" value="URL"
-                                        class="form-control btn btn-outline-secondary w-50" />
+                                    <button id="btnAvatarFile" type="button"
+                                        class="btn btn-outline-secondary w-50 active">Archivo</button>
+                                    <button id="btnAvatarURL" type="button"
+                                        class="btn btn-outline-secondary w-50">URL</button>
                                 </div>
                             </div>
                             <div class="col">
@@ -189,7 +185,7 @@
                                             id="avatarImageFileLabel">Archivo de imagen</label>
                                     </div>
                                 </div>
-                                <div class="input-group" id="panelAvatarURL">
+                                <div class="input-group" id="panelAvatarURL" style="display: none;">
                                     <input type="text" class="form-control" id="avatarImageURL"
                                         placeholder="URL a una imagen" required disabled>
                                     <div class="input-group-append">
@@ -201,14 +197,19 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">SALIR</button>
-                            <button type="submit" class="btn btn-primary">SELECCIONAR IMAGEN</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">SALIR</button>
+                            <button type="submit" class="btn btn-primary" id="selectImageBtn">SELECCIONAR
+                                IMAGEN</button>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
+        <!-- Agrega esto en tu HTML, preferiblemente al final del body -->
+        <div id="notification" class="notification"></div>
+
     </main>
+
     <footer class="text-muted">
         <div class="container">
             <p class="float-end">
