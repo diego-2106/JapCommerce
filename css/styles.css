@@ -32,13 +32,43 @@ nav a {
   height: 50vh;
   padding: 5em inherit;
   margin-bottom: 0;
-  background-color: #53c0fb;
-  background: url("../img/cover_back.png");
+  background-image: url("../img/cover_back.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   color: black;
   font-weight: bold;
+}
+
+@media screen and (max-width: 2150px) {
+  .jumbotron {
+    background-position: 100%;
+  }
+}
+
+@media screen and (max-width: 1900px) {
+  .jumbotron {
+    background-position: 80% 0;
+  }
+}
+
+@media screen and (max-width: 1800px) {
+  .jumbotron {
+    background-position: 40% 0;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .jumbotron {
+    background-position: 40% 0;
+  }
+}
+
+@media 
+screen and (max-width: 1300px) {
+  .jumbotron {
+    background-position: 20% 0;
+  }
 }
 
 @media (min-width: 768px) {
