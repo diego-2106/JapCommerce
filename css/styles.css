@@ -40,40 +40,58 @@ nav a {
   font-weight: bold;
 }
 
-@media screen and (max-width: 2150px) {
+@media screen and (max-width: 3000px) {
   .jumbotron {
     background-position: 100%;
   }
 }
 
-@media screen and (max-width: 1900px) {
+@media screen and (max-width: 2500px) {
   .jumbotron {
-    background-position: 80%;
+    background-position: 85%;
   }
 }
 
-@media screen and (max-width: 1800px) {
+@media screen and (max-width: 2400px) {
   .jumbotron {
-    background-position: 40%;
+    background-position: 30%;
+  }
+}
+
+@media screen and (max-width: 1600px) {
+  .jumbotron {
+    background-position: 10%;
   }
 }
 
 @media screen and (max-width: 1400px) {
   .jumbotron {
-    background-position: 40%;
+    background-position: -100;
   }
 }
 
 @media screen and (max-width: 1300px) {
   .jumbotron {
-    background-position: 20%;
+    background-position: -250px;
   }
 }
 
-@media 
-screen and (max-width: 400px) {
+@media screen and (max-width: 1040px) {
   .jumbotron {
-    max-width: 100%;
+    background-position: -280px;
+  }
+}
+
+@media screen and (max-width: 1010px) {
+  .jumbotron {
+    background-position: -300px;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .jumbotron {
+    background-image: url("../img/login.png");
+    
   }
 }
 
