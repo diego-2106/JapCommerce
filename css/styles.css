@@ -119,18 +119,6 @@ nav a {
   font-size: 38px;
 }
 
-
-footer {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-  display: flex;
-  justify-content: space-between;
-}
-
-footer p {
-  margin-bottom: 0.25rem;
-}
-
 .site-header a {
   color: white;
   transition: ease-in-out color 0.15s;
@@ -308,16 +296,6 @@ a.custom-card:hover {
   padding: .5rem;
 }
 
-#related-products {
-  margin-top: 3rem
-}
-#related-products h2 {
-  margin-bottom: 1.5rem
-}
-
-.btn-publicar {
-  width: 10rem;
-}
 
 /*---------------------------------ESTRELLITAS----------------------------------------- */
 
@@ -407,7 +385,7 @@ body {
   width: 60px;
 }
 
-/*Carrito*/
+/*Diseño del Carrito*/
 .formulario {
   margin-top: 2rem;
 }
@@ -483,12 +461,10 @@ body {
   color: #DC3545;
 }
 
+/*Diseño de los a*/
+
 #clearRangeFilter, #Ver-condiciones, footer a, #MyProfileSelec{
   text-decoration: none;
-}
-
-#vender, #related-products{
-  margin: 3%;
 }
 
 /*-------------------Diseño del carrusel------------------*/
@@ -527,4 +503,33 @@ body {
 #venderSell {
     margin-bottom: 5%;
 }
+}
+
+#vender {
+  margin: 3%;
+}
+
+/*Diseño en product-info*/
+
+#related-products {
+  margin-top: 3rem
+}
+#related-products h2 {
+  margin-bottom: 1.5rem
+}
+
+.btn-publicar {
+  width: 10rem;
+}
+
+/*Diseño del footer*/
+footer {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+footer p {
+  margin-bottom: 0.25rem;
 }
