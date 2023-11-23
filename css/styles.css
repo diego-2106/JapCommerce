@@ -39,6 +39,7 @@ nav a {
   color: black;
   font-weight: bold;
 }
+/* Imagen del index responsive*/
 
 @media screen and (max-width: 3000px) {
   .jumbotron {
@@ -72,31 +73,27 @@ nav a {
 
 @media screen and (max-width: 1300px) {
   .jumbotron {
-    background-position: -250px;
-  }
-}
-
-@media screen and (max-width: 1040px) {
-  .jumbotron {
-    background-position: -280px;
-  }
-}
-
-@media screen and (max-width: 1010px) {
-  .jumbotron {
-    background-position: -300px;
+    background-position: 10%;
   }
 }
 
 @media screen and (max-width: 1000px) {
   .jumbotron {
-    background-size: 260% auto;
+    background-size: 150% auto;
+    background-position: 10%;
   }
 }
 
 @media screen and (max-width: 900px) {
   .jumbotron {
-    background-size: 250% auto;
+    background-size: 160% auto;
+    background-position: 20%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .jumbotron {
+    background-size: 210% auto;
     background-position: 20%;
   }
 }
@@ -115,6 +112,8 @@ nav a {
 .jumbotron-heading {
   font-weight: 300;
 }
+
+/* Fin de imagen del index responsive*/
 
 .lead {
   font-size: 38px;

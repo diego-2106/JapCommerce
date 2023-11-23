@@ -3,7 +3,14 @@
     margin-left: 5rem;
 }
 
+/* diseño responsive del switch en el dropdown menu */
 
+@media screen and (max-width: 1000px) {
+    #switch {
+        margin: 0;
+    }
+    
+}
 .switchDark{
     background-color: #3494b1;
     display: flex;
