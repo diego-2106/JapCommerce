@@ -7,7 +7,8 @@
 
 @media screen and (max-width: 1000px) {
     #switch {
-        margin: 0;
+        margin-left: 0;
+        margin-top: 5%;
     }
     
 }
@@ -90,7 +91,7 @@ body.dark .bg-light {
 
 /*-------------------Diseño del dropdown menú------------------*/
 
-body.dark .dropdown-menu, body.dark .colordark {
+body.dark .dropdown-menu, body.dark .colordark, body.dark .dropdown-item {
     border-color: #4D4D4D;
     background-color:  #212529;
     color: #fff;
@@ -99,7 +100,7 @@ body.dark .dropdown-menu, body.dark .colordark {
 
 /*-------------------Diseño de los a ------------------*/
 
-body.dark #clearRangeFilter, body.dark #Ver-condiciones, body.dark footer a {
+body.dark #clearRangeFilter, body.dark #Ver-condiciones, body.dark footer a, body.dark #MyProfileSelec{
     color: aqua;
 }
 
