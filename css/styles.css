@@ -90,8 +90,14 @@ nav a {
 
 @media screen and (max-width: 1000px) {
   .jumbotron {
-    background-image: url("../img/login.png");
-    
+    background-size: 260% auto;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .jumbotron {
+    background-size: 250% auto;
+    background-position: 20%;
   }
 }
 
