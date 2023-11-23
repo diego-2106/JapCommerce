@@ -35,7 +35,8 @@ function saveProductId(productId) {
 }
 
 async function showProductList() {
-    const url = `https://japceibal.github.io/emercado-api/cats_products/${localStorage.getItem("catID")}.json`;
+    const url = 'http://localhost:3000/cats/cat.json';
+    // const url = `https://japceibal.github.io/emercado-api/cats_products/${localStorage.getItem("catID")}.json`;
 
 
     try {
