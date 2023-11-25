@@ -44,4 +44,4 @@ const manual = document.getElementById('manual');
 
     manual.addEventListener('click', () => {
         window.open('./manual/Manual_ecommerce.pdf', '_blank');
-    })
+    });
