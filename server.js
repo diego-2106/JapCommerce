@@ -5,6 +5,7 @@ const fs = require("fs");
 const port = 3000;
 
 app.use(express.json());
+app.use(express.text());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => { 
@@ -38,33 +39,41 @@ app.get('/cats/cat.json', (req, res) => {
     const data = fs.readFileSync(path.join(__dirname, 'json', 'cats', 'cat.json'), 'utf8');
     res.json(JSON.parse(data));
 });
-
+//4
 app.get('/cats_products/:catID', (req, res) => {
-    const data = fs.readFile('./json/cats_products/:catID', 'utf8');
-    res.json(JSON.parse[req.params.catID]);
-});
+    const catID = req.params.catID;
+    const filePath = path.join(__dirname, 'json', 'cats_products', `${catID}.json`);
 
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            // Manejar el error, por ejemplo, devolver un código de estado 404
+            res.status(404).send('Archivo no encontrado');
+        } else {
+            // Parsear el contenido del archivo JSON y devolverlo como respuesta
+            res.json(JSON.parse(data));
+        }
+    });
+});
+//5
 app.get('/products/:id', (req, res) => {
-    const data = fs.readFile('./json/products/:id', 'utf8');
+    const productId = req.params.id;
+    const filePath = path.join(__dirname, 'json', 'products', `${productId}.json`);
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            // Manejar el error, por ejemplo, devolver un código de estado 404
+            res.status(404).send('Archivo no encontrado');
+        } else {
+            // Parsear el contenido del archivo JSON y devolverlo como respuesta
+            res.json(JSON.parse(data));
+        }
+    });
+});
+app.get('/user_cart/25801.js', (req, res) => {
+    const data = fs.readFileSync(path.join(__dirname, 'json', 'user_carts', '25801.json'), 'utf8');
     res.json(JSON.parse(data));
 });
 
-// app.get('/sell/publish.json', (req, res) => {
-//     const data = fs.readFileSync('./data/publish.json', 'utf8');
-//     res.json(JSON.parse(data));
-// });
-
-// app.get('/sell/publish.json', (req, res) => {
-//     const data = fs.readFileSync('./data/publish.json', 'utf8');
-//     res.json(JSON.parse(data));
-// });
-
-// app.get('/sell/publish.json', (req, res) => {
-//     const data = fs.readFileSync('./data/publish.json', 'utf8');
-//     res.json(JSON.parse(data));
-// });
-
-  
 
 
 app.listen(port, () => {
