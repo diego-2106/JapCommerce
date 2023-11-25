@@ -35,7 +35,7 @@
                             <br>
 
                             <!--Form Start-->
-                            <form>
+                            <form method="post" action="/login">
                                 <div class="mb-4">
                                 <!--Email-->
                     
@@ -50,7 +50,7 @@
                                
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="basic-addon1">&#128100</span>
-                                    <input type="email" class="form-control" placeholder="Email" aria-label="Email" id="emailInput" aria-describedby="emailHep" autocomplete="off">
+                                    <input type="text" class="form-control" name="email" placeholder="Email" aria-label="Email" id="emailInput" aria-describedby="emailHep" autocomplete="off">
                                     <p id="emailError"></p>
                                   </div>
                              </div>
@@ -62,7 +62,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <i id="toggleIcon" class="bi bi-eye"></i>
                                         </span>
-                                        <input type="password" class="form-control" placeholder="Password" aria-label="Password" id="passwordInput" aria-describedby="basic-addon1">
+                                        <input type="password" class="form-control" name="password" placeholder="Password" aria-label="Password" id="passwordInput" aria-describedby="basic-addon1">
                                         <p id="passwordError"></p>
                                     </div>
                                     
