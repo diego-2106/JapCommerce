@@ -5,8 +5,67 @@ const fs = require("fs");
 const port = 3000;
 
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'JapCommerce')));
+
+app.get('/', (req, res) => { 
+    const filePath = path.join(__dirname, 'front', 'index.html');
+    res.sendFile(filePath);
+});
+
+//PARTE 1
+app.get('/json/sell/publish.json', (req, res) => {
+    res.sendFile(path.join(__dirname,'front', 'json', 'sell', 'publish.json'));
+  });
+
+app.get('/json/cart/buy.json', (req, res) => {
+    res.sendFile(path.join(__dirname,'front', 'json', 'cart', 'buy.json'), 'utf8');
+   
+});
+
+app.get('/json/cats/cat.json', (req, res) => {
+    res.sendFile(path.join(__dirname,'front', 'json', 'cats', 'cat.json'), 'utf8');
+    
+});
+
+app.get('/json/cats_products/:catID', (req, res) => {
+    const catID = req.params.catID;
+    res.sendFile(path.join(__dirname,'front', 'json', 'cats_products', `${catID}.json`));
+});
+
+app.get('/json/products/:id', (req, res) => {
+    const id = req.params.id;
+    res.sendFile(path.join(__dirname,'front', 'json', 'products', `${id}.json`));
+
+});
+
+app.get('/json/products_comments/:product', (req, res) => {
+    const product = req.params.product;
+    res.sendFile(path.join(__dirname,'front', 'json', 'products_comments', `${product}.json`));
+
+});
+
+app.get('/json/user_cart/25801.js', (req, res) => {
+    res.sendFile(path.join(__dirname, 'front','json', 'user_cart', '25801.json'), 'utf8');
+    
+});
+
+app.listen(port, () => {
+    console.log(`Corriendo en el servidor http://localhost:${port}`);
+});
+
+
+
+
+
+/* const express = require("express");
+const app = express();
+const path = require('path');
+const fs = require("fs");
+const port = 3000;
+
+app.use(express.json());
 app.use(express.text());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'json')));
 
 app.get('/', (req, res) => { 
     const filePath = path.join(__dirname, './front/login.html');
@@ -37,7 +96,7 @@ app.get('/cart/buy.json', (req, res) => {
 //3
 app.get('/cats/cat.json', (req, res) => {
     const data = fs.readFileSync(path.join(__dirname, 'json', 'cats', 'cat.json'), 'utf8');
-    res.json(JSON.parse(data));
+    res.sendFile(path.join(__dirname, 'cats', 'cat.json'));
 });
 //4
 app.get('/cats_products/:catID', (req, res) => {
@@ -80,3 +139,4 @@ app.listen(port, () => {
 
     console.log(`Corriendo en el servidor http://localhost:${port}`);
 });
+ */
